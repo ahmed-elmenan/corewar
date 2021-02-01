@@ -102,8 +102,9 @@ void set_champ_info(t_env *env, char *str, int item_length, char (*item_containe
 	if (ft_strequ(str + i, "\"\""))
 		(*item_container)[0] = '\0';
 	// multilines in string name
-	content_arr = str + i + 1;
-	if (content_arr[ft_strlen(content_arr) - 1] != '"')
+	content_arr = str + i + 1;  
+	printf("content_arr = %s\n", content_arr); 
+	if (content_arr[ft_strlen(content_arr) - 1] != '"') // find another solution here
 		extract_multiline_string(env, content_arr, item_length, item_container, item);
 	else // single line in stirng name
 		extract_signleline_string(env, str, i, item_length, item_container, item);
@@ -143,9 +144,10 @@ void organize_beginning_data(t_env *env)
 					 (COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
 	while (get_next_line(env->src_file, &line) > 0)
 	{
+		printf("line = %s\n", line);
 		if (str_begins_with(line, NAME_CMD_STRING))
 		{
-			set_champ_info(env, line, PROG_NAME_LENGTH , &env->hdr.prog_name, "name");
+			set_champ_info(env, line, PROG_NAME_LENGTH, &env->hdr.prog_name, "name");
 			env->check_name |= 1;
 		}
 		else if (str_begins_with(line, COMMENT_CMD_STRING))

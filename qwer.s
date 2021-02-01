@@ -1,8 +1,6 @@
-.name           "cha#p
-i
-o
-n" #ss
-.comment        "men neyytk baghi terbe7ni ? #wa33333
+.comment        "men neyytk baghi terbe7ni ?" #wa33333
+.name           "cha#p"
+
 
 loop:
         sti r1, %:live, %1

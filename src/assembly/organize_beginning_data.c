@@ -25,88 +25,88 @@ int char_index(char *str, char c)
 	return (-1);
 }
 
-char *end_quotes_search(t_env *env, char *joinned_str)
+void check_string_length(int item_len, int max_len, char *item)
+{
+	if (item_len > max_len)
+	{
+		ft_putstr("The champion ");
+		ft_putstr(item);
+		ft_putstr(" exceed ");
+		ft_putnbr(max_len);
+		ft_putendl(" character");
+		// free the pointer to struct
+		exit(0);
+	}
+}
+
+void extract_multiline_string(t_env *env, char *joinned_str, int item_length, char (*item_container)[item_length], char *item)
 {
 	int res;
 	int quotes_index;
-	int newline_nbr;
 	char *newline_str;
 	char *line;
 	char *tmp;
 
-	newline_nbr = 0;
+	joinned_str = ft_strdup(joinned_str);
 	while ((res = get_next_line(env->src_file, &line)) > 0)
 	{
 		tmp = joinned_str;
 		newline_str = ft_strjoin("\n", line);
 		joinned_str = ft_strjoin(joinned_str, newline_str);
-		// ft_strdel(&tmp);
+		ft_strdel(&newline_str);
+		ft_strdel(&tmp);
 
 		if ((quotes_index = char_index(joinned_str, '"')) >= 0)
 		{
-
 			joinned_str[quotes_index] = '\0';
-
+			ft_strdel(&line);
 			break;
 		}
-		env->save_name_len += ft_strlen(joinned_str);
-		// ft_strdel(&newline_str);
-		// ft_strdel(&line);
-		newline_nbr++;
+		ft_strdel(&line);
 	}
 	if (quotes_index == -1)
-		printf("string end quotes doesn't exist");
-	if (ft_strlen(joinned_str) > PROG_NAME_LENGTH)
 	{
-		ft_putendl("The champion name exceed 128 character");
+		ft_putstr("Couldn't find the ending quotes of the ");
+		ft_putstr(item);
+		ft_putendl(" string");
 		// free the pointer to struct
 		exit(0);
 	}
-	return joinned_str;
+	check_string_length(ft_strlen(joinned_str), item_length, item);
+	ft_strcpy(*item_container, joinned_str);
+	ft_memdel((void **)&joinned_str);
 }
 
-void set_champ_name(t_env *env, char *str, int len)
+void extract_signleline_string(t_env *env, char *str, int i, int item_length, char (*item_container)[item_length], char *item)
+{
+	int j;
+
+	check_string_length(ft_strlen(str) - 2, item_length, item);
+	j = i;
+	++i;
+	while (str[++j] && str[j] != '"')
+		;
+	ft_strncpy(*item_container, &str[i], j - i);
+}
+
+void set_champ_info(t_env *env, char *str, int item_length, char (*item_container)[item_length], char *item)
 {
 	int i;
-	int j;
-	char str_length;
-	char *joinned_str;
-	char *tmp; //test
+	char *content_arr;
+	char *tmp;
 
 	i = -1;
 	while (str[++i] && str[i] != '"')
 		;
-	// name = ""
+	// if name stirng  == ""
 	if (ft_strequ(str + i, "\"\""))
-		env->hdr.prog_name[0] = '\0';
-	// name = ""
-
-	// if (env->save_name_len > len)
-	// {
-	// 	ft_putendl("The champion name exceed 128 character");
-	// 	// free the pointer to struct
-	// 	exit(0);
-	// }
-	// multilines in stirng name
-	joinned_str = str + i + 1;
-	if (joinned_str[ft_strlen(joinned_str) - 1] != '"')
-	{
-		tmp = end_quotes_search(env, joinned_str); // strcopy to prog
-		printf("tmp  = %s\n", tmp);
-		printf("tmp len  = %d\n", ft_strlen(tmp)); 
-		exit(0);
-	}
+		(*item_container)[0] = '\0';
+	// multilines in string name
+	content_arr = str + i + 1;
+	if (content_arr[ft_strlen(content_arr) - 1] != '"')
+		extract_multiline_string(env, content_arr, item_length, item_container, item);
 	else // single line in stirng name
-	{
-		j = i;
-		++i;
-		while (str[++j] && str[j] != '"')
-			;
-		ft_strncpy(env->hdr.prog_name, &str[i], j - i);
-		printf("prog  = %s\n", env->hdr.prog_name);
-		exit(0);
-	}
-	env->check_name |= 1;
+		extract_signleline_string(env, str, i, item_length, item_container, item);
 }
 
 void set_champ_comment(t_env *env, char *str)
@@ -122,14 +122,12 @@ void set_champ_comment(t_env *env, char *str)
 	while (str[++j] && str[j] != '"')
 		;
 	ft_strncpy(env->hdr.comment, &str[i], j - i);
-	env->check_comment |= 1;
 }
 
 void ft_check_name_and_comment_existence(int checker, char *item)
 {
 	if (!checker)
 	{
-		printf("checker = %d\n", checker);
 		ft_putstr(item);
 		ft_putendl(" doesn't exist");
 		// free the pointer to struct
@@ -146,15 +144,27 @@ void organize_beginning_data(t_env *env)
 	while (get_next_line(env->src_file, &line) > 0)
 	{
 		if (str_begins_with(line, NAME_CMD_STRING))
-			set_champ_name(env, line, PROG_NAME_LENGTH);
+		{
+			set_champ_info(env, line, PROG_NAME_LENGTH , &env->hdr.prog_name, "name");
+			env->check_name |= 1;
+		}
 		else if (str_begins_with(line, COMMENT_CMD_STRING))
 		{
-			set_champ_comment(env, line);
+			set_champ_info(env, line, COMMENT_LENGTH, &env->hdr.comment, "comment");
+			env->check_comment |= 1;
+		}
+		if (env->check_name && env->check_comment)
+		{
+			ft_strdel(&line);
 			break;
 		}
+		ft_strdel(&line);
 	}
+	printf("env->hdr.prog_name = %s\n", env->hdr.prog_name);
+	printf("env->hdr.comment = %s\n", env->hdr.comment);
 	ft_check_name_and_comment_existence(env->check_name, "name");
 	ft_check_name_and_comment_existence(env->check_comment, "comment");
+	exit(0);
 }
 /************************************print*******************************************/
 

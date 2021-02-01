@@ -74,8 +74,6 @@ typedef struct	s_env
 	// checking vars
 	int check_name;
 	int check_comment;
-	int save_name_len;
-	int save_comment_len;
 	
 	// checking vars
 }				t_env;

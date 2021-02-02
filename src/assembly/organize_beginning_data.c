@@ -39,6 +39,15 @@ void check_string_length(int item_len, int max_len, char *item)
 	}
 }
 
+void	missing_last_quotes_error(char *item)
+{
+		ft_putstr("Couldn't find the ending quotes of the ");
+		ft_putstr(item);
+		ft_putendl(" string");
+		// free the pointer to struct
+		exit(0);
+}
+
 void extract_multiline_string(t_env *env, char *joinned_str, int item_length, char (*item_container)[item_length], char *item)
 {
 	int res;
@@ -55,7 +64,6 @@ void extract_multiline_string(t_env *env, char *joinned_str, int item_length, ch
 		joinned_str = ft_strjoin(joinned_str, newline_str);
 		ft_strdel(&newline_str);
 		ft_strdel(&tmp);
-
 		if ((quotes_index = char_index(joinned_str, '"')) >= 0)
 		{
 			joinned_str[quotes_index] = '\0';
@@ -65,13 +73,7 @@ void extract_multiline_string(t_env *env, char *joinned_str, int item_length, ch
 		ft_strdel(&line);
 	}
 	if (quotes_index == -1)
-	{
-		ft_putstr("Couldn't find the ending quotes of the ");
-		ft_putstr(item);
-		ft_putendl(" string");
-		// free the pointer to struct
-		exit(0);
-	}
+		missing_last_quotes_error(item);
 	check_string_length(ft_strlen(joinned_str), item_length, item);
 	ft_strcpy(*item_container, joinned_str);
 	ft_memdel((void **)&joinned_str);
@@ -94,35 +96,24 @@ void set_champ_info(t_env *env, char *str, int item_length, char (*item_containe
 	int i;
 	char *content_arr;
 	char *tmp;
+	int last_quotes_index;
 
 	i = -1;
 	while (str[++i] && str[i] != '"')
 		;
-	// if name stirng  == ""
 	if (ft_strequ(str + i, "\"\""))
+	{
 		(*item_container)[0] = '\0';
-	// multilines in string name
-	content_arr = str + i + 1;  
-	printf("content_arr = %s\n", content_arr); 
+		return ;
+	}
+	content_arr = str + i + 1;
+	if ((last_quotes_index = char_index(content_arr, '"')) >= 0)
+		content_arr[last_quotes_index + 1] = '\0';
+
 	if (content_arr[ft_strlen(content_arr) - 1] != '"') // find another solution here
 		extract_multiline_string(env, content_arr, item_length, item_container, item);
 	else // single line in stirng name
 		extract_signleline_string(env, str, i, item_length, item_container, item);
-}
-
-void set_champ_comment(t_env *env, char *str)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (str[++i] && str[i] != '"')
-		;
-	j = i;
-	++i;
-	while (str[++j] && str[j] != '"')
-		;
-	ft_strncpy(env->hdr.comment, &str[i], j - i);
 }
 
 void ft_check_name_and_comment_existence(int checker, char *item)
@@ -139,12 +130,10 @@ void ft_check_name_and_comment_existence(int checker, char *item)
 void organize_beginning_data(t_env *env)
 {
 	char *line;
-	// check erro name & comment
 	env->hdr.magic = ((COREWAR_EXEC_MAGIC & 0xff) << 24) |
 					 (COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
 	while (get_next_line(env->src_file, &line) > 0)
 	{
-		printf("line = %s\n", line);
 		if (str_begins_with(line, NAME_CMD_STRING))
 		{
 			set_champ_info(env, line, PROG_NAME_LENGTH, &env->hdr.prog_name, "name");
@@ -162,13 +151,12 @@ void organize_beginning_data(t_env *env)
 		}
 		ft_strdel(&line);
 	}
-	printf("env->hdr.prog_name = %s\n", env->hdr.prog_name);
-	printf("env->hdr.comment = %s\n", env->hdr.comment);
 	ft_check_name_and_comment_existence(env->check_name, "name");
 	ft_check_name_and_comment_existence(env->check_comment, "comment");
-	exit(0);
 }
 /************************************print*******************************************/
+	// printf("env->hdr.prog_name = %s\n", env->hdr.prog_name);
+	// printf("env->hdr.comment = %s\n", env->hdr.comment);
 
 void write_bgn_data(t_env *env)
 {

@@ -3,16 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/01 12:09:33 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/02/02 17:26:11 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-void	save_label_position(char *line, int current_bytes, t_env *env)
+int	ft_binary_search(char *tab, char c)
+{
+	int	start;
+	int	end;
+	int	mid;
+	int	res;
+
+	start = 0;
+	end = strlen(tab) - 1;
+	mid = 0;
+	while (start <= end)
+	{
+		mid = (start + end) / 2;
+		res = c  -  tab[mid];
+		if (!res)
+			return (mid);
+		else if (res < 0)
+			end = mid - 1;
+		else if (res > 0)
+			start = mid + 1;
+	}
+	return (-1);
+}
+
+void save_label_position(char *line, int current_bytes, t_env *env)
 {
 	int i;
 	int j;
@@ -38,7 +62,7 @@ void	save_label_position(char *line, int current_bytes, t_env *env)
 	env->lbl->label_position = current_bytes;
 }
 
-int		is_label_operation_in_same_line(char *line)
+int is_label_operation_in_same_line(char *line)
 {
 	int i;
 
@@ -52,15 +76,15 @@ int		is_label_operation_in_same_line(char *line)
 	return (0);
 }
 
-void	save_line(t_env *env, char *line, int *current_bytes)
+void save_line(t_env *env, char *line, int *current_bytes)
 {
 	int i;
-	
+
 	env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
 	env->dt = env->dt->next;
 	env->dt->line = line;
-	
-	env->dt->current_octets = *current_bytes;	
+
+	env->dt->current_octets = *current_bytes;
 	if (is_label(line))
 	{
 		save_label_position(line, *current_bytes, env);
@@ -73,19 +97,52 @@ void	save_line(t_env *env, char *line, int *current_bytes)
 	}
 }
 
-void	tokenize_data(t_env *env)
+void	verify_label_chars(char *label)
+{
+	int i;
+    
+    i = -1;
+	printf("label = %s\n", label);
+	while(label[++i])
+    {
+        if (ft_binary_search(LABEL_CHARS, label[i]) < 0)
+        {
+            ft_putendl("syntax error: label name contains inappropriate charachter");
+			// free
+            exit(0);
+        }
+    }
+}
+
+void tokenize_data(t_env *env)
 {
 	char *line;
-	int		current_bytes;
-	int i;
+	int current_bytes;
+	int label_char_index;
+	char *label;
 
 	current_bytes = 0;
-	get_next_line(env->src_file, &line);
+	// get_next_line(env->src_file, &line);
+	
 	env->data->line = line;
 	env->dt = env->data;
 	while (get_next_line(env->src_file, &line))
 	{
-		save_line(env, line, &current_bytes);
+		if (line[0] == '.')
+		{
+			ft_putendl("syntax error: command not found");
+			// free pointers
+			ft_strdel(&line);
+			exit(0);
+		}
+		// if op
+		if ((label_char_index = char_index(line, LABEL_CHAR)) >= 0)
+		{
+			label = ft_strsub(line, 0, label_char_index);
+			verify_label_chars(label);
+		}
+		
+		// save_line(env, line, &current_bytes);
 		/***/
 	}
 }

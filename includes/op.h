@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/01/15 15:40:49 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/02/02 16:37:06 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #define DIRECT_CHAR				'%'
 #define SEPARATOR_CHAR			','
 
-#define LABEL_CHARS				"abcdefghijklmnopqrstuvwxyz_0123456789"
+#define LABEL_CHARS				"0123456789_abcdefghijklmnopqrstuvwxyz"
 
 #define NAME_CMD_STRING			".name"
 #define COMMENT_CMD_STRING		".comment"

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/01 19:10:40 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:34:15 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		get_operation_size(t_env *env, char *line);
 int		get_all_arguments_size(char *line, int opr);
 int		get_this_arg_size(char *line, int i, int op);
 int		get_t_dir_size(int op);
+int		char_index(char *str, char c);
 
 int		is_operation(char *line);
 int		is_empty_line(char *line);

@@ -1,14 +1,17 @@
-.comment        "men neyytkbag
+.comment"men neyytkbag
 hi ter
 be7
 ni
 ?" #wa33333
-.name           "cha#
+.name"cha#
 p" #zezezeze
 
 
-loop:
+lozop:
         sti r1, %:live, %1
+
+
+
 live:
         live %0
         ld %0, r2

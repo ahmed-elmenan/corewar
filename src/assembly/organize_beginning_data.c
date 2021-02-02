@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/01 19:55:38 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/02 15:34:57 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,27 @@ void check_string_length(int item_len, int max_len, char *item)
 	}
 }
 
-void	missing_last_quotes_error(char *item)
+void missing_last_quotes_error(char *item, int quotes_index)
 {
+	if (quotes_index == -1)
+	{
 		ft_putstr("Couldn't find the ending quotes of the ");
 		ft_putstr(item);
 		ft_putendl(" string");
 		// free the pointer to struct
 		exit(0);
+	}
 }
 
 void extract_multiline_string(t_env *env, char *joinned_str, int item_length, char (*item_container)[item_length], char *item)
 {
-	int res;
 	int quotes_index;
 	char *newline_str;
 	char *line;
 	char *tmp;
 
 	joinned_str = ft_strdup(joinned_str);
-	while ((res = get_next_line(env->src_file, &line)) > 0)
+	while (get_next_line(env->src_file, &line) > 0)
 	{
 		tmp = joinned_str;
 		newline_str = ft_strjoin("\n", line);
@@ -72,8 +74,7 @@ void extract_multiline_string(t_env *env, char *joinned_str, int item_length, ch
 		}
 		ft_strdel(&line);
 	}
-	if (quotes_index == -1)
-		missing_last_quotes_error(item);
+	missing_last_quotes_error(item, quotes_index);
 	check_string_length(ft_strlen(joinned_str), item_length, item);
 	ft_strcpy(*item_container, joinned_str);
 	ft_memdel((void **)&joinned_str);
@@ -91,6 +92,14 @@ void extract_signleline_string(t_env *env, char *str, int i, int item_length, ch
 	ft_strncpy(*item_container, &str[i], j - i);
 }
 
+void content_not_found_error(char *item)
+{
+		ft_putstr(item);
+		ft_putendl(" content not found");
+		// free 
+		exit(0);
+}
+
 void set_champ_info(t_env *env, char *str, int item_length, char (*item_container)[item_length], char *item)
 {
 	int i;
@@ -101,10 +110,12 @@ void set_champ_info(t_env *env, char *str, int item_length, char (*item_containe
 	i = -1;
 	while (str[++i] && str[i] != '"')
 		;
+	if (i == ft_strlen(str))
+		content_not_found_error(item);
 	if (ft_strequ(str + i, "\"\""))
 	{
 		(*item_container)[0] = '\0';
-		return ;
+		return;
 	}
 	content_arr = str + i + 1;
 	if ((last_quotes_index = char_index(content_arr, '"')) >= 0)
@@ -121,7 +132,7 @@ void ft_check_name_and_comment_existence(int checker, char *item)
 	if (!checker)
 	{
 		ft_putstr(item);
-		ft_putendl(" doesn't exist");
+		ft_putendl(" not found");
 		// free the pointer to struct
 		exit(0);
 	}
@@ -151,12 +162,12 @@ void organize_beginning_data(t_env *env)
 		}
 		ft_strdel(&line);
 	}
+	// printf("env->hdr.prog_name = %s\n", env->hdr.prog_name); // DEL
+	// printf("env->hdr.comment = %s\n", env->hdr.comment); // DEL
 	ft_check_name_and_comment_existence(env->check_name, "name");
 	ft_check_name_and_comment_existence(env->check_comment, "comment");
 }
 /************************************print*******************************************/
-	// printf("env->hdr.prog_name = %s\n", env->hdr.prog_name);
-	// printf("env->hdr.comment = %s\n", env->hdr.comment);
 
 void write_bgn_data(t_env *env)
 {

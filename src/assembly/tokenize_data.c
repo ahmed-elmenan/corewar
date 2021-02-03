@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/02 17:26:11 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/03 15:48:39 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,12 @@ int	ft_binary_search(char *tab, char c)
 	return (-1);
 }
 
-void save_label_position(char *line, int current_bytes, t_env *env)
+void	save_label_position(char *line, int current_bytes, t_env *env)
 {
 	int i;
 	int j;
 
-	j = -1;
-	while (IS_SPACE(line[++j]))
-		;
-	--j;
-	i = j - 1;
-	while (line[++i] && line[i] != LABEL_CHAR)
-		;
+	
 	if (!env->label)
 	{
 		env->label = (t_label *)ft_memalloc(sizeof(t_label));
@@ -58,43 +52,42 @@ void save_label_position(char *line, int current_bytes, t_env *env)
 		env->lbl->next = (t_label *)ft_memalloc(sizeof(t_label));
 		env->lbl = env->lbl->next;
 	}
-	env->lbl->label_name = ft_strsub(line, j, i);
+	env->lbl->label_name = "label";
 	env->lbl->label_position = current_bytes;
 }
 
-int is_label_operation_in_same_line(char *line)
+int		is_label_operation_in_same_line(char *line)
 {
 	int i;
 
 	i = 0;
-	while (line[i] && line[i] != LABEL_CHAR)
+	while (line[i] && !IS_COMMENT_CHAR(line[i]) && line[i] != LABEL_CHAR)
 		i++;
-	while (IS_SPACE(line[++i]))
-		;
+	line[i] == LABEL_CHAR ? i++ : 0;
+	while (IS_SPACE(line[i]))
+		i++;
 	if (is_operation(&line[i]))
 		return (i);
 	return (0);
 }
 
-void save_line(t_env *env, char *line, int *current_bytes)
+void	save_line(t_env *env, char *line, int *current_bytes)
 {
 	int i;
-
+	
 	env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
 	env->dt = env->dt->next;
 	env->dt->line = line;
-
-	env->dt->current_octets = *current_bytes;
+	
+	env->dt->current_octets = *current_bytes;	
 	if (is_label(line))
 	{
 		save_label_position(line, *current_bytes, env);
 		if ((i = is_label_operation_in_same_line(line)) > 0)
-			*current_bytes += get_operation_size(env, &line[i]);
+			*current_bytes += get_operation_size(&line[i]);
 	}
 	else if (is_operation(line))
-	{
-		*current_bytes += get_operation_size(env, line);
-	}
+		*current_bytes += get_operation_size(line);
 }
 
 void	verify_label_chars(char *label)
@@ -114,16 +107,16 @@ void	verify_label_chars(char *label)
     }
 }
 
-void tokenize_data(t_env *env)
+void	tokenize_data(t_env *env)
 {
 	char *line;
-	int current_bytes;
+	int		current_bytes;
 	int label_char_index;
 	char *label;
+	int i;
 
 	current_bytes = 0;
-	// get_next_line(env->src_file, &line);
-	
+	get_next_line(env->src_file, &line);
 	env->data->line = line;
 	env->dt = env->data;
 	while (get_next_line(env->src_file, &line))
@@ -141,8 +134,8 @@ void tokenize_data(t_env *env)
 			label = ft_strsub(line, 0, label_char_index);
 			verify_label_chars(label);
 		}
-		
 		// save_line(env, line, &current_bytes);
 		/***/
 	}
+	// printf("\n");
 }

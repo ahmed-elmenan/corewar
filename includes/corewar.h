@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/02 15:34:15 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/03 15:38:38 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 /***********************/
 #include <stdio.h>
 
-
-
 #define IS_SPACE(X) (X == ' ' || X == '\t')
 #define	IS_COMMENT_CHAR(X) (X == ALT_COMMENT_CHAR || X == COMMENT_CHAR)
 #define	BGN_DATA (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
@@ -30,8 +28,8 @@
 
 typedef struct	s_data
 {
-	char			*line;
 	int				current_octets;
+	char			*line;
 	struct s_data	*next;
 }				t_data;
 
@@ -71,6 +69,8 @@ typedef struct	s_env
 	int			dst_file;
 	int			current_size;
 	int			i;
+
+	int			sup;
 	// checking vars
 	int check_name;
 	int check_comment;
@@ -80,9 +80,10 @@ typedef struct	s_env
 
 
 int		get_operation_code(char *line);
+int		get_operation_len(char *line);
 int		get_first_char_index(char *str);
 int		get_current_argument_code(char *line);
-int		get_operation_size(t_env *env, char *line);
+int		get_operation_size(char *line);
 int		get_all_arguments_size(char *line, int opr);
 int		get_this_arg_size(char *line, int i, int op);
 int		get_t_dir_size(int op);

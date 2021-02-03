@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/02 15:34:57 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/03 16:51:56 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,27 +140,37 @@ void ft_check_name_and_comment_existence(int checker, char *item)
 
 void organize_beginning_data(t_env *env)
 {
-	char *line;
+	char *regular_line;
+	char *trimed_line;
+	int begin_name;
+	int begin_comment;
 	env->hdr.magic = ((COREWAR_EXEC_MAGIC & 0xff) << 24) |
 					 (COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
-	while (get_next_line(env->src_file, &line) > 0)
+	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
-		if (str_begins_with(line, NAME_CMD_STRING))
+		trimed_line = ft_strtrim(regular_line);
+		if (trimed_line[0] == '.' && !str_begins_with(trimed_line, NAME_CMD_STRING) && !str_begins_with(trimed_line, COMMENT_CMD_STRING))
 		{
-			set_champ_info(env, line, PROG_NAME_LENGTH, &env->hdr.prog_name, "name");
+			printf("syntax error: command <%s> not found", trimed_line + 1);
+			// free
+			exit(0);
+		}
+		if (str_begins_with(trimed_line, NAME_CMD_STRING))
+		{
+			set_champ_info(env, trimed_line, PROG_NAME_LENGTH, &env->hdr.prog_name, "name");
 			env->check_name |= 1;
 		}
-		else if (str_begins_with(line, COMMENT_CMD_STRING))
+		else if (str_begins_with(trimed_line, COMMENT_CMD_STRING))
 		{
-			set_champ_info(env, line, COMMENT_LENGTH, &env->hdr.comment, "comment");
+			set_champ_info(env, trimed_line, COMMENT_LENGTH, &env->hdr.comment, "comment");
 			env->check_comment |= 1;
 		}
 		if (env->check_name && env->check_comment)
 		{
-			ft_strdel(&line);
+			ft_strdel(&regular_line);
 			break;
 		}
-		ft_strdel(&line);
+		ft_strdel(&regular_line);
 	}
 	// printf("env->hdr.prog_name = %s\n", env->hdr.prog_name); // DEL
 	// printf("env->hdr.comment = %s\n", env->hdr.comment); // DEL
@@ -178,7 +188,6 @@ void write_beginning_data(t_env *env)
 	int null;
 
 	null = 0;
-	organize_beginning_data(env);
 	write(env->dst_file, &(env->hdr.magic), 4);
 	write(env->dst_file, &(env->hdr.prog_name), PROG_NAME_LENGTH);
 	write(env->dst_file, &null, 4);

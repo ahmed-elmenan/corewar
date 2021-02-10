@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:35 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/03 14:57:24 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/10 18:42:45 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ void	allocate_variables(t_env **env)
 	(*env)->champion = (char *)ft_memalloc(sizeof(char) * CHAMP_MAX_SIZE);
 }
 
-int     main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_env *env;
-
 	char *p = "vm_champs/champs/mortel.s";
 	if (ac > 1 || 1)
-	{	
+	{
 		allocate_variables(&env);
 		if (!open_file(av[ac-1], env))
 			return (-1);
@@ -52,8 +51,7 @@ int     main(int ac, char **av)
 		env->sup = 0;
 		write_bytecode_in_file(env);
 	}
-	
-	
+
 	printf("____________________________________\n____________________________________\n");
 	print_labels(env);
 	print_data(env);

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/03 16:51:56 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/10 18:50:52 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,23 +138,33 @@ void ft_check_name_and_comment_existence(int checker, char *item)
 	}
 }
 
+void ft_command_not_found(char *trimed_line) {
+	int quotes_index;
+
+	quotes_index = char_index(trimed_line, '"');
+			printf("syntax error: command <%s> not found", ft_strsub(trimed_line, 0,
+				quotes_index > 0 ? quotes_index - 1 : ft_strlen(trimed_line)));
+			// free line,....
+			exit(0);
+	
+}
+
+
 void organize_beginning_data(t_env *env)
 {
 	char *regular_line;
 	char *trimed_line;
 	int begin_name;
 	int begin_comment;
+	
 	env->hdr.magic = ((COREWAR_EXEC_MAGIC & 0xff) << 24) |
 					 (COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
 	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
 		trimed_line = ft_strtrim(regular_line);
-		if (trimed_line[0] == '.' && !str_begins_with(trimed_line, NAME_CMD_STRING) && !str_begins_with(trimed_line, COMMENT_CMD_STRING))
-		{
-			printf("syntax error: command <%s> not found", trimed_line + 1);
-			// free
-			exit(0);
-		}
+		if (trimed_line[0] == '.' && !str_begins_with(trimed_line, NAME_CMD_STRING) &&
+			!str_begins_with(trimed_line, COMMENT_CMD_STRING))
+				ft_command_not_found(trimed_line); 
 		if (str_begins_with(trimed_line, NAME_CMD_STRING))
 		{
 			set_champ_info(env, trimed_line, PROG_NAME_LENGTH, &env->hdr.prog_name, "name");

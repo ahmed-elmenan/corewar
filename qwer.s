@@ -1,5 +1,4 @@
           .name           "champion executable" #commentaire
-.grbe3
 .comment        "men neyytk
  bag
  hi 
@@ -7,10 +6,12 @@
  e7n
  i ?" #wa33333
 
-entree:	live	%42
+entree:	
+	zjmp    %:tir
 	ld	%0,r5
 	ld	%0,r5
-	zjmp	%:tir
+	live	%42
+	
 
 tir:	sti	r1,%:tirb,%1
 	ld	%2304,r10

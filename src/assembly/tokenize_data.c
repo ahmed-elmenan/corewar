@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/10 19:39:56 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/12 18:01:46 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,21 @@ int ft_binary_search(char *tab, char c)
 	return (-1);
 }
 
-int	ft_binary_search_2d(char **tab, char *vertex_name, int len)
+int ft_binary_search_2d(char *operation, t_op tab[16])
 {
-	int	start;
-	int	end;
-	int	mid;
-	int	res;
+	int start;
+	int end;
+	int mid;
+	int res;
 
 	start = 0;
-	end = len - 1;
+	end = 16;
 	mid = 0;
 	while (start <= end)
 	{
 		mid = (start + end) / 2;
-		res = strcmp(vertex_name, tab[mid]);
+		printf("bbb>> %s\n", tab[mid].op_name);
+		res = strcmp(operation, tab[mid].op_name);
 		if (!res)
 			return (mid);
 		else if (res < 0)
@@ -57,9 +58,9 @@ int	ft_binary_search_2d(char **tab, char *vertex_name, int len)
 		else if (res > 0)
 			start = mid + 1;
 	}
+	
 	return (-1);
 }
-
 
 void save_label_position(char *line, int current_bytes, t_env *env)
 {
@@ -130,23 +131,36 @@ void verify_label_chars(char *label)
 	}
 }
 
-char  *verify_operation_name(char *operation)
+void	verify_operation_name(char *operation)
+{
+	printf(">> %s\n", operation);
+
+	
+	if (ft_binary_search_2d(operation, op_tab) < 0)
+		{
+			printf("syntax error: label name contains inappropriate charachter\n");
+			// free
+			exit(0);
+		}
+}
+
+void check_if_operation(char *op)
 {
 	int i;
-	char *str;
+	char *sub_op;
+	char *args;
 
-	i = -1;
-	while (op_tab[++i].op_name)
+	i = 0;
+	while (op[i] && !IS_SPACE(op[i]) && op[i] != LABEL_CHAR && op[i] != DIRECT_CHAR)
 	{
-		if ((str = ft_strstr(operation, op_tab[i].op_name)))
-		{
-			return(str);
-		}	
+		i++;
 	}
-	ft_putendl("syntax error: label name contains inappropriate charachter");
-	// free
-	exit(0);
-	return (NULL);
+	sub_op = ft_strsub(op, 0, i);
+	args = ft_strtrim(op + i);
+	printf("%s\n", sub_op);
+	verify_operation_name(sub_op);
+	
+	printf("args = %s\n", args);
 }
 
 void tokenize_data(t_env *env)
@@ -159,6 +173,9 @@ void tokenize_data(t_env *env)
 	char *label;
 	char *op;
 	char *trimed_line;
+	char **splited;
+	char **rest_arg;
+	char **args;
 
 	int i;
 
@@ -169,30 +186,32 @@ void tokenize_data(t_env *env)
 	while (get_next_line(env->src_file, &line))
 	{
 		trimed_line = ft_strtrim(line);
+		if (!trimed_line[0]|| trimed_line[0] == COMMENT_CHAR ||
+			trimed_line[0] == ALT_COMMENT_CHAR)
+			continue;
 		if (line[0] == '.')
 			ft_command_not_found(trimed_line);
-		
-		if ((char_pos = char_index(trimed_line, DIRECT_CHAR)) >= 0)
-		{
-			str = ft_strsub(trimed_line, 0, char_pos);
-			if ((char_label = char_index(str, LABEL_CHAR)) >= 0)
-			{
-				label = ft_strsub(trimed_line, 0, char_label);
-				verify_label_chars(label);
-				
-			}
-			char_label = char_label > -1? char_label : 0;
-			op = ft_strtrim(str + char_label);
-			op = verify_operation_name(op);
-			printf("o00p = %s\n", op);
-		}
-		else if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0)
+
+		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 && !trimed_line[char_pos + 1])
 		{
 			label = ft_strsub(trimed_line, 0, char_pos);
 			verify_label_chars(label);
-				printf("label = %s\n", label);
+			printf("label = %s\n", label);
+			// else if (trimed_line[char_pos - 1] == DIRECT_CHAR)
+			// {
+			// 	printf("op = %s\n", trimed_line + i);
+			// 	exit(0);
+			// }
 			// check the op after the label
 		}
+		// handle label: op ... 
+		else
+		{
+			check_if_operation(trimed_line);
+		}
+
+		// else if ()
+
 		// else if (verify op name it could be without label)
 		// save_line(env, line, &current_bytes);
 		ft_strdel(&line);

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2021/02/03 15:50:29 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/12 15:02:48 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 #define DIRECT_CHAR				'%'
 #define SEPARATOR_CHAR			','
 
-#define LABEL_CHARS				"0123456789_abcdefghijklmnopqrstuvwxyz"
+#define LABEL_CHARS				"0123456789_abcdefghijklmnopqrstuvwxyz" // don't forget to sort this list by ascii
 
 #define NAME_CMD_STRING			".name"
 #define COMMENT_CMD_STRING		".comment"

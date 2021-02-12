@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/10 16:32:59 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/11 15:41:09 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void	translate_data_to_code(t_env *env);
 void	write_beginning_data(t_env *env);
 void	write_bytecode_in_file(t_env *env);
 void	ft_command_not_found(char *trimed_line);
+
+char	**ft_split_whitespaces(char *str);
 
 
 #endif  

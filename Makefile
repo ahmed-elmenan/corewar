@@ -20,6 +20,7 @@ ASSEMBLY_FILES = is_input_correct.c\
 				tokenize_data.c\
 				translate_data_to_code.c\
 				analyze_line.c\
+				ft_split_whitespaces.c\
 				get_operation_info.c\
 				get_arguments_info.c\
 				create_file.c\

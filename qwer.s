@@ -6,7 +6,7 @@
  e7n
  i ?" #wa33333
 
-entree:
+entree: 
 	sti%:tirb,r1,%1
 	zjmp%:tir
 	ld	%0,r5

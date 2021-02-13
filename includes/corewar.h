@@ -117,6 +117,7 @@ void	translate_data_to_code(t_env *env);
 void	write_beginning_data(t_env *env);
 void	write_bytecode_in_file(t_env *env);
 void	ft_command_not_found(char *trimed_line);
+void	check_if_operation(char *op);
 
 char	**ft_split_whitespaces(char *str);
 

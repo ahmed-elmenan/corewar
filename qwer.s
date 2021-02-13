@@ -13,7 +13,7 @@ entree:
 	ld	%0,r5
 	live	%42
 
-tir:    add	r3,r4,r3
+tir:    asssdd	r3,r4,r3
          sti	r1,%:tirb,%1
 	ld	%2304,r10
                	ld	%1,r5

@@ -143,11 +143,14 @@ void verify_operation_name(char *operation, char *op, int i, int *is_op)
 	{
 		printf("<%s> is a label\n", operation);
 		check_if_operation(ft_strtrim(op + i));
-		
+		// try to add some flag to the label chacker
 	}
-	// printf("syntax error: operation <%s> not found\n", operation);
-	// // free
-	// exit(0);
+	else
+	{
+		printf("syntax error: operation <%s> not found\n", operation);
+		// free
+		exit(0);
+	}
 }
 
 int skip_white_spaces_and_arg_chars(char *str)

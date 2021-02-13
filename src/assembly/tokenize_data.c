@@ -123,7 +123,7 @@ int verify_label_chars(char *label)
 	{
 		if (ft_binary_search(LABEL_CHARS, label[i]) < 0)
 		{
-			ft_putendl("syntax error: label name contains inappropriate charachter");
+			printf("syntax error: label <%s> contains inappropriate charachter\n", label);
 			// free
 			exit(0);
 		}
@@ -131,7 +131,7 @@ int verify_label_chars(char *label)
 	return (1);
 }
 
-void verify_operation_name(char *operation, char *op, int i, int *is_op)
+void verify_operation_name(char *operation, char *op, int i, int *is_op, t_env *env)
 {
 	if (ft_binary_search_2d(operation, op_tab) >= 0)
 	{
@@ -139,11 +139,21 @@ void verify_operation_name(char *operation, char *op, int i, int *is_op)
 		*is_op = 1;
 		return;
 	}
-	else if (verify_label_chars(operation))
+	else if (!env->label_already_checked)
 	{
-		printf("<%s> is a label\n", operation);
-		check_if_operation(ft_strtrim(op + i));
-		// try to add some flag to the label chacker
+		if (verify_label_chars(operation))
+		{
+			env->label_already_checked = 1;
+			printf("<%s> is a label\n", operation);
+			check_if_operation(ft_strtrim(op + i), env);
+		}
+		else
+		{
+			printf("syntax error: label <%s> not found\n", operation);
+			// free
+			exit(0);
+		}
+		// try to add some flag to the label checker
 	}
 	else
 	{
@@ -162,7 +172,7 @@ int skip_white_spaces_and_arg_chars(char *str)
 	return (i);
 }
 
-void check_if_operation(char *op)
+void check_if_operation(char *op, t_env *env)
 {
 	int i;
 	char *sub_op;
@@ -172,7 +182,7 @@ void check_if_operation(char *op)
 	is_op = 0;
 	i = skip_white_spaces_and_arg_chars(op);
 	sub_op = ft_strsub(op, 0, i);
-	verify_operation_name(sub_op, op, i + 1, &is_op);
+	verify_operation_name(sub_op, op, i + 1, &is_op, env);
 	// printf("op = %s\n", sub_op);
 	if (is_op)
 	{
@@ -190,42 +200,28 @@ void tokenize_data(t_env *env)
 
 	int i;
 
-	get_next_line(env->src_file, &line);
+	// get_next_line(env->src_file, &line);
 	env->data->line = line;
 	env->dt = env->data;
 	while (get_next_line(env->src_file, &line))
 	{
+		env->label_already_checked = 0;
 		trimed_line = ft_strtrim(line);
 		if (!trimed_line[0] || trimed_line[0] == COMMENT_CHAR ||
 			trimed_line[0] == ALT_COMMENT_CHAR)
 			continue;
-		if (line[0] == '.')
-			ft_command_not_found(trimed_line);
-
+		if (trimed_line[0] == '.')
+			ft_command_not_found(trimed_line);		
 		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 && !trimed_line[char_pos + 1])
 		{
+			env->label_already_checked = 1;
 			label = ft_strsub(trimed_line, 0, char_pos);
 			verify_label_chars(label);
 			printf("<%s> is a label\n", label);
-
-			// else if (trimed_line[char_pos - 1] == DIRECT_CHAR)
-			// {
-			// 	printf("op = %s\n", trimed_line + i);
-			// 	exit(0);
-			// }
-			// check the op after the label
-			continue;
 		}
-		// handle label: op ...
-		// else if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 && !trimed_line[char_pos + 1])
 		else
-		{
-			check_if_operation(trimed_line);
-		}
+			check_if_operation(trimed_line, env);
 
-		// else if ()
-
-		// else if (verify op name it could be without label)
 		// save_line(env, line, &current_bytes);
 		ft_strdel(&line);
 		/***/

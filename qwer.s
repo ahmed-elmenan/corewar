@@ -1,18 +1,18 @@
-          .name           "champion executable" #commentaire
+.name           "champion executable"#commentaire
 .comment        "men neyytk
  bag
- hi 
+ hi
  terb
  e7n
- i ?" #wa33333
+ i ?    ";dfdf#wa33333
 
-entree: 
+entree:
 	sti%:tirb,r1,%1
 	zjmp%:tir
 	ld	%0,r5
 	ld	%0,r5
 	live	%42
-      .yreyz
+
 tir:    add	r3,r4,r3
          sti	r1,%:tirb,%1
 	ld	%2304,r10

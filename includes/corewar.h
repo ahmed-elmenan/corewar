@@ -109,15 +109,17 @@ int		is_arg_first_char(char *line, int i);
 int     is_input_correct(char *s);
 int		is_args_octet_present(int op);
 int		is_label_operation_in_same_line(char *line);
+int		ft_empty_or_comment_line(char *str);
+int		create_file(char *s, t_env *env);
+
 
 unsigned char	set_args_octet(char *line);
-int		create_file(char *s, t_env *env);
 void    organize_beginning_data(t_env *env);
 void	tokenize_data(t_env *env);
 void	translate_data_to_code(t_env *env);
 void	write_beginning_data(t_env *env);
 void	write_bytecode_in_file(t_env *env);
-void	ft_command_not_found(char *trimed_line);
+void	ft_command_not_found(char *trimed_line, t_env *env);
 void	check_if_operation(char *op, t_env *env);
 
 char	**ft_split_whitespaces(char *str);

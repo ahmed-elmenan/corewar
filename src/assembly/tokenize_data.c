@@ -133,6 +133,11 @@ int verify_label_chars(t_env *env, char *label)
 
 void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 {
+	printf("str = %s\n", str);
+	printf("op = %s\n", op);
+	printf("op2 = %s\n", op + i);
+	exit(0);
+	// check label as an operation 
 	if (ft_binary_search_2d(str, op_tab) >= 0)
 	{
 		printf("<%s> is an operation\n", str);

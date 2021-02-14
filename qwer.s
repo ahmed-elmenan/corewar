@@ -6,8 +6,7 @@
  e7n
  i ?    ";dfdf#wa33333
 
-entree:
-	sti%:tirb,r1,%1
+sti: sti%:tirb,r1,%1
 	zjmp%:tir
 	ld	%0,r5
 	ld	%0,r5

@@ -133,28 +133,33 @@ int verify_label_chars(t_env *env, char *label)
 
 void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 {
+	char *tmp;
 	printf("str = %s\n", str);
 	printf("op = %s\n", op);
 	printf("op2 = %s\n", op + i);
-	exit(0);
-	// check label as an operation 
-	if (ft_binary_search_2d(str, op_tab) >= 0)
+	// exit(0);
+	// check label as an operation
+	tmp = ft_strtrim(op + i - 1);
+	if (ft_binary_search_2d(str, op_tab) >= 0 && tmp[0] != LABEL_CHAR)
 	{
 		printf("<%s> is an operation\n", str);
 		*is_op = 1;
 		// check op args args = ft_strtrim(op + i - 1);
+		ft_strdel(&tmp);
 		return;
 	}
 	else if (!env->label_already_checked && verify_label_chars(env, str))
 	{
 		env->label_already_checked = 1;
 		printf("<%s> is a label\n", str);
+		ft_strdel(&tmp);
 		check_if_operation(ft_strtrim(op + i), env);
 	}
 	else
 	{
 		printf("Syntax Error[%d]: Operation <%s> not found\n", env->line_counter, str);
 		// free
+		ft_strdel(&tmp);
 		exit(0);
 	}
 }
@@ -178,7 +183,7 @@ void check_if_operation(char *op, t_env *env)
 
 	is_op = 0;
 	i = skip_white_spaces_and_arg_chars(op);
-	sub_op = ft_strsub(op, 0, i); // to free 
+	sub_op = ft_strsub(op, 0, i); // to free
 	verify_item_name(sub_op, op, i + 1, &is_op, env);
 	// printf("op = %s\n", sub_op);
 	if (is_op)

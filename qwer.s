@@ -8,7 +8,7 @@
 
 live: #wash
 	sti :tirb,r1,%1
-	zjmp%:tir
+	zjmp %:tir
 	ld	%0,r5
 	ld	%0,r5
 	live	%42
@@ -20,7 +20,7 @@ ld:    add	r3,r4,r3
 
 	ld	%4,r3
 sti:	live	%42
-	fork     
+	fork     r2
 	live	%742
 	sub	r3,r5,r3
 	zjmp	%:tirop
@@ -31,7 +31,7 @@ sti:	live	%42
 	sti r10,%-404,%0
 	sti	r10,%-303,%0
 				sti	r10,%-202,%0
-	ld	%0,r11
+	ld	%0,r11,r1
 	zjmp	%:tirf
 
 tirop:	ld	%368,r2

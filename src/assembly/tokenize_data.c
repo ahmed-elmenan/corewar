@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/12 18:01:46 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/16 19:40:00 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,22 +136,70 @@ int verify_label_chars(t_env *env, char *label)
 	return (1);
 }
 
-void print_2d_arr(char **str)
+int		arr_len_2d(char **str)
 {
 	int i;
 
 	i = -1;
 	while (str[++i])
 	{
-		printf("str[%d] = <%s>\n", i, ft_strtrim(str[i]));
+		printf("str[%d] = <%s>\n", i, ft_strtrim(str[i])); // trim
+	}
+	return (i);
+}
+
+void	ft_check_args_len(t_env *env, int len)
+{
+	if (env->found_op->arg_len < len)
+	{
+		printf("Error[%d]: too many arguments to operation <%s>\n", env->line_counter, env->found_op->op_name);
+		// free da3wa
+		exit(0);
+	} 
+	else if (!len)
+	{
+		printf("Error[%d]: the operation <%s> has no arguments\n", env->line_counter, env->found_op->op_name);
+		// free da3wa
+		exit(0);
+	}
+	else if (env->found_op->arg_len > len)
+	{
+		printf("Error[%d]: too few arguments to operation <%s>\n", env->line_counter, env->found_op->op_name);
+		// free da3wa
+		exit(0);
 	}
 }
 
-void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
+void	check_args_type(t_env *env, char **args)
 {
-	char *tmp;
-	char *args_tmp;
-	char **args;
+	int i;
+
+	i = -1;
+	while(args[++i])
+	{
+		if (args[i][0] == DIRECT_CHAR)
+		{
+			while ()
+			{
+				/* code */
+			}
+			
+		}	
+		else if (args[i][0] == LABEL_CHAR)
+		{}	
+		else if (args[i][0] == 'r')
+		{}
+		else
+		{}
+	}
+}
+
+void	verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
+{
+	char	*tmp;
+	char	*args_tmp;
+	char	**args;
+	int		args_len;
 
 	tmp = op + i - 1;
 	if (ft_binary_search_2d(env, str, op_tab) >= 0 && tmp[0] != LABEL_CHAR)
@@ -164,24 +212,11 @@ void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 			//free
 			exit(0);
 		}
-		if (char_index(args_tmp, SEPARATOR_CHAR) >= 0)
-		{
-			args = ft_strsplit(args_tmp, SEPARATOR_CHAR);
-			print_2d_arr(args); // let the trim and delete the print
-		}
-		else
-		{
-			if (!args_tmp[0])
-			{
-				printf("Error[%d]: the operation <%s> has no arguments\n", env->line_counter, str);
-				// free da3wa
-				exit(0);
-			}
-			*args = args_tmp;
-			print_2d_arr(args); // let the trim and delete the print
-		}
-		printf("found_op = %s\n", env->found_op->op_name);
-		// exit(0);
+		args = ft_strsplit(args_tmp, SEPARATOR_CHAR);
+		args_len = arr_len_2d(args); // let the trim and delete the print
+		// printf("found_op = %s\n", env->found_op->op_name);
+		printf("len = %d\n", args_len);
+		ft_check_args_len(env, args_len);
 
 		// ft_strdel(&tmp);
 		return;

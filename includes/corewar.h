@@ -87,6 +87,7 @@ typedef struct	s_env
 	int			check_comment;
 	int			label_already_checked;
 	int			line_counter;
+	t_op		*found_op;
 
 	// checking vars
 }				t_env;

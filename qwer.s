@@ -6,21 +6,21 @@
  e7n
  i ?    ";dfdf#wa33333
 
-live:       sti%:tirb,r1,%1
+live: #wash
+	sti :tirb,r1,%1
 	zjmp%:tir
 	ld	%0,r5
 	ld	%0,r5
 	live	%42
 
-tir:    add	r3,r4,r3
+ld:    add	r3,r4,r3
          sti	r1,%:tirb,%1
-	ld	%2304,r10
                	ld	%1,r5
 	ld	%0,r11
 
 	ld	%4,r3
 sti:	live	%42
-	fork	%:tirf
+	fork     
 	live	%742
 	sub	r3,r5,r3
 	zjmp	%:tirop

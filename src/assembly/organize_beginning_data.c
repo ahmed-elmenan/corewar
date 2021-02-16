@@ -181,10 +181,10 @@ int check_name_comment_flag(t_env *env)
 	return (env->check_name && env->check_comment);
 }
 
-void ft_error_founded_before_item(char *str, t_env *env, char *item)
+void ft_error_found_before_item(char *str, t_env *env, char *item)
 {
 
-	printf("Error[%d]: <%s> has been founded before %s\n", env->line_counter, str, item);
+	printf("Error[%d]: <%s> has been found before %s\n", env->line_counter, str, item);
 	// free the pointer to struct
 	exit(0);
 }
@@ -231,11 +231,11 @@ void organize_beginning_data(t_env *env)
 		else
 		{
 			if (!env->check_name && env->check_comment)
-				ft_error_founded_before_item(trimed_line, env, "name");
+				ft_error_found_before_item(trimed_line, env, "name");
 			else if (!env->check_comment && env->check_name)
-				ft_error_founded_before_item(trimed_line, env, "comment");
+				ft_error_found_before_item(trimed_line, env, "comment");
 			else if (!env->check_comment && !env->check_name)
-				ft_error_founded_before_item(trimed_line, env, "name and comment");
+				ft_error_found_before_item(trimed_line, env, "name and comment");
 		}
 		if (check_name_comment_flag(env))
 		{

@@ -9,7 +9,7 @@
 live: #wash
 	sti r1,r1,%1
 	zjmp%:tir
-	ld	%0,r5
+	lsdsdd	%0,r5
 	ld	%0,r5
 	live	%42
 

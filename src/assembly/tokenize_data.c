@@ -252,6 +252,7 @@ void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 	int args_len;
 
 	tmp = op + i - 1;
+	printf("s = <%s>\n", str);
 	if (ft_binary_search_2d(env, str, op_tab) >= 0 && tmp[0] != LABEL_CHAR)
 	{
 		*is_op = 1;
@@ -275,12 +276,14 @@ void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 	{
 		env->label_already_checked = 1;
 		// printf("<%s> is a label\n", str);
+		
 		ft_strdel(&str);
 		check_if_operation(ft_strtrim(op + i), env);
 	}
 	else
 	{
-		// printf("Syntax Error[%d]: Operation <%s> not found\n", env->line_counter, str);
+		
+		printf("Syntax Error[%d]: Operation <%s> not found\n", env->line_counter, str);
 		// free
 		// ft_strdel(&tmp);
 		exit(0);

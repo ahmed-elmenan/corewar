@@ -136,26 +136,27 @@ int verify_label_chars(t_env *env, char *label)
 	return (1);
 }
 
-int		arr_len_2d(char **str)
+int arr_len_2d(char **str)
 {
 	int i;
 
 	i = -1;
 	while (str[++i])
 	{
-		printf("str[%d] = <%s>\n", i, ft_strtrim(str[i])); // trim
+		// printf("str[%d] = <%s>\n", i, ft_strtrim(str[i])); // trim
+		;
 	}
 	return (i);
 }
 
-void	ft_check_args_len(t_env *env, int len)
+void ft_check_args_len(t_env *env, int len)
 {
 	if (env->found_op->arg_len < len)
 	{
 		printf("Error[%d]: too many arguments to operation <%s>\n", env->line_counter, env->found_op->op_name);
 		// free da3wa
 		exit(0);
-	} 
+	}
 	else if (!len)
 	{
 		printf("Error[%d]: the operation <%s> has no arguments\n", env->line_counter, env->found_op->op_name);
@@ -170,36 +171,85 @@ void	ft_check_args_len(t_env *env, int len)
 	}
 }
 
-void	check_args_type(t_env *env, char **args)
+void error_passing_indirect(t_env *env, char c)
 {
-	int i;
-
-	i = -1;
-	while(args[++i])
+	if (c == LABEL_CHAR)
 	{
-		if (args[i][0] == DIRECT_CHAR)
-		{
-			while ()
-			{
-				/* code */
-			}
-			
-		}	
-		else if (args[i][0] == LABEL_CHAR)
-		{}	
-		else if (args[i][0] == 'r')
-		{}
-		else
-		{}
+		// free
+		// free trimed_str
+		printf("Error[%d]: Passing indirect argument to <%s> operation\n", env->line_counter, env->found_op->op_name);
+		exit(0);
 	}
 }
 
-void	verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
+void error_passing_direct(t_env *env, char c)
 {
-	char	*tmp;
-	char	*args_tmp;
-	char	**args;
-	int		args_len;
+	if (c == DIRECT_CHAR)
+	{
+		// free
+		// free trimed_str
+		printf("Error[%d]: Passing direct argument to <%s> operation\n", env->line_counter, env->found_op->op_name);
+		exit(0);
+	}
+}
+
+void error_passing_registry(t_env *env, char c)
+{
+	if (c == 'r')
+	{
+		// free
+		// free trimed_str
+		printf("Error[%d]: Passing registry argument to <%s> operation\n", env->line_counter, env->found_op->op_name);
+		exit(0);
+	}
+}
+
+void check_args_type(t_env *env, char **args)
+{
+	int i;
+	int res;
+	char *trimed_str;
+
+	i = -1;
+	while (args[++i])
+	{
+		res = env->found_op->arg[i];
+		trimed_str = ft_strtrim(args[i]);
+		// printf("res = %d\n", res);
+		// printf("args[i][0] = %c\n", trimed_str[0]);
+		if (res == 1)
+		{
+			error_passing_direct(env, trimed_str[0]);
+			error_passing_indirect(env, trimed_str[0]);
+		}
+		else if (res == 2)
+		{
+			error_passing_registry(env, trimed_str[0]);
+			error_passing_indirect(env, trimed_str[0]);
+		}
+		else if (res == 3)
+			error_passing_indirect(env, trimed_str[0]);
+		else if (res == 6)
+			error_passing_registry(env, trimed_str[0]);
+		if (trimed_str[0] != LABEL_CHAR && trimed_str[0] != DIRECT_CHAR
+			&& trimed_str[0] != 'r')
+		{
+			printf("Error[%d]: Passing unknown argument to operation <%s>\n", env->line_counter, env->found_op->op_name);
+			ft_strdel(&trimed_str);
+			exit(0);
+		}
+		// starting the parse of each argument
+		ft_strdel(&trimed_str);
+		// exit(0);
+	}
+}
+
+void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
+{
+	char *tmp;
+	char *args_tmp;
+	char **args;
+	int args_len;
 
 	tmp = op + i - 1;
 	if (ft_binary_search_2d(env, str, op_tab) >= 0 && tmp[0] != LABEL_CHAR)
@@ -214,23 +264,23 @@ void	verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 		}
 		args = ft_strsplit(args_tmp, SEPARATOR_CHAR);
 		args_len = arr_len_2d(args); // let the trim and delete the print
-		// printf("found_op = %s\n", env->found_op->op_name);
-		printf("len = %d\n", args_len);
+		printf("found_op = %s\n", env->found_op->op_name);
+		// printf("len = %d\n", args_len);
 		ft_check_args_len(env, args_len);
-
+		check_args_type(env, args);
 		// ft_strdel(&tmp);
 		return;
 	}
 	else if (!env->label_already_checked && verify_label_chars(env, str))
 	{
 		env->label_already_checked = 1;
-		printf("<%s> is a label\n", str);
+		// printf("<%s> is a label\n", str);
 		ft_strdel(&str);
 		check_if_operation(ft_strtrim(op + i), env);
 	}
 	else
 	{
-		printf("Syntax Error[%d]: Operation <%s> not found\n", env->line_counter, str);
+		// printf("Syntax Error[%d]: Operation <%s> not found\n", env->line_counter, str);
 		// free
 		// ft_strdel(&tmp);
 		exit(0);
@@ -294,7 +344,7 @@ void tokenize_data(t_env *env)
 			env->label_already_checked = 1;
 			label = ft_strsub(trimed_line, 0, char_pos);
 			verify_label_chars(env, label);
-			printf("<%s> is a label\n", label);
+			// printf("<%s> is a label\n", label);
 		}
 		else
 			check_if_operation(trimed_line, env);

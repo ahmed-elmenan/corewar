@@ -5,17 +5,15 @@
  terb
  e7n
  i ?    ";dfdf#wa33333
-
-live: #wash
-	sti r1,r1,%1
-	zjmp%:tir
-	lsdsdd	%0,r5
-	ld	%0,r5
+ 
+tirf: ld	%0, r16
+	zjmp %:tirb
 	live	%42
+
 
 ld:    	
 	add	r3,r4,r3
-    sti	r1,%:tirb,%1
+    sti	r1,r1,%1
     ld	%1,r5
 	ld	%0,r11
 	ld	%4,r3
@@ -47,4 +45,4 @@ tirb:	live	%1
 	zjmp	%:tirop
 			ld	%0,r11
 	zjmp	%:entree
-	zjmp	%:tir
+	zjmp	%:tirb

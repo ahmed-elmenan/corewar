@@ -122,8 +122,6 @@ int verify_label_chars(t_env *env, char *label)
 	int i;
 
 	i = -1;
-	// printf("label = %s\n", label);
-	// exit(0);
 	while (label[++i])
 	{
 		if (ft_binary_search(LABEL_CHARS, label[i]) < 0)
@@ -171,9 +169,24 @@ void ft_check_args_len(t_env *env, int len)
 	}
 }
 
-void error_passing_indirect(t_env *env, char c)
+int ft_is_string_number(char *str)
 {
-	if (c == LABEL_CHAR)
+	int i;
+
+	i = -1;
+	if (str[0] == '-')
+		i++;
+	while (str[++i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+	}
+	return (1);
+}
+
+void error_passing_indirect(t_env *env, char *str)
+{
+	if (str[0] == LABEL_CHAR || ft_is_string_number(str))
 	{
 		// free
 		// free trimed_str
@@ -204,6 +217,84 @@ void error_passing_registry(t_env *env, char c)
 	}
 }
 
+void error_big_reg_value(t_env *env)
+{
+	printf("Error[%d]: Registery value is bigger than 16\n", env->line_counter);
+	// free
+	exit(0);
+}
+
+void error_reg_value_not_digit(t_env *env)
+{
+	printf("Error[%d]: Registery value is not a digit\n", env->line_counter);
+	// free
+	exit(0);
+}
+
+void error_reg_value_is_negative(t_env *env)
+{
+	printf("Error[%d]: Registery value is negative\n", env->line_counter);
+	// free
+	exit(0);
+}
+
+void error_value_contains_positive_sign(t_env *env, char *arg_type)
+{
+	printf("Error[%d]: %s value contains positive sign\n", env->line_counter, arg_type);
+	// free
+	exit(0);
+}
+
+void error_overflow_or_underflow_int(t_env *env, char *arg_type)
+{
+	printf("Error[%d]: %s value is bigger or less than int limits\n", env->line_counter, arg_type);
+	// free
+	exit(0);
+}
+
+void handle_int_errors(t_env *env, char *arg, char *arg_type)
+{
+	if (ft_is_string_number(arg + 1))
+		if (ft_atoll(arg + 1) == TRUE)
+			error_overflow_or_underflow_int(env, arg_type);
+}
+
+void	handle_number_error(t_env *env, char *arg, char *arg_type)
+{
+	if (arg[1] == '+')
+			error_value_contains_positive_sign(env, arg_type);
+		if (ft_is_string_number(arg + 1))
+			handle_int_errors(env, arg, arg_type);
+}
+
+void check_argument_value(t_env *env, char *trimed_str)
+{
+	int i;
+	int reg_value;
+
+	i = 0;
+	printf("tri = %s\n", trimed_str);
+	if (trimed_str[0] == 'r')
+	{
+		reg_value = ft_atoi(trimed_str + 1);
+		if (reg_value > REG_NUMBER)
+			error_big_reg_value(env);
+		if (reg_value < 0)
+			error_reg_value_is_negative(env);
+		if (trimed_str[1] == '+')
+			error_value_contains_positive_sign(env, "Registery");
+		while (trimed_str[++i])
+		{
+			if (!ft_isdigit(trimed_str[i]))
+				error_reg_value_not_digit(env);
+		}
+	}
+	else if (trimed_str[0] == DIRECT_CHAR)
+		handle_number_error(env, trimed_str, "Direct");
+	else if (trimed_str[0] == LABEL_CHAR || ft_is_string_number(trimed_str))
+		handle_number_error(env, trimed_str, "Indirect");
+}
+
 void check_args_type(t_env *env, char **args)
 {
 	int i;
@@ -220,25 +311,26 @@ void check_args_type(t_env *env, char **args)
 		if (res == 1)
 		{
 			error_passing_direct(env, trimed_str[0]);
-			error_passing_indirect(env, trimed_str[0]);
+			error_passing_indirect(env, trimed_str);
 		}
 		else if (res == 2)
 		{
 			error_passing_registry(env, trimed_str[0]);
-			error_passing_indirect(env, trimed_str[0]);
+			error_passing_indirect(env, trimed_str);
 		}
 		else if (res == 3)
-			error_passing_indirect(env, trimed_str[0]);
+			error_passing_indirect(env, trimed_str);
 		else if (res == 6)
 			error_passing_registry(env, trimed_str[0]);
-		if (trimed_str[0] != LABEL_CHAR && trimed_str[0] != DIRECT_CHAR
-			&& trimed_str[0] != 'r')
+		if (trimed_str[0] != LABEL_CHAR && trimed_str[0] != DIRECT_CHAR && trimed_str[0] != 'r' && !ft_is_string_number(trimed_str))
 		{
 			printf("Error[%d]: Passing unknown argument to operation <%s>\n", env->line_counter, env->found_op->op_name);
 			ft_strdel(&trimed_str);
 			exit(0);
 		}
 		// starting the parse of each argument
+		
+		check_argument_value(env, trimed_str);
 		ft_strdel(&trimed_str);
 		// exit(0);
 	}
@@ -253,6 +345,8 @@ void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 
 	tmp = op + i - 1;
 	printf("s = <%s>\n", str);
+	printf("|tmp| = <%s>\n", tmp);
+
 	if (ft_binary_search_2d(env, str, op_tab) >= 0 && tmp[0] != LABEL_CHAR)
 	{
 		*is_op = 1;
@@ -274,15 +368,20 @@ void verify_item_name(char *str, char *op, int i, int *is_op, t_env *env)
 	}
 	else if (!env->label_already_checked && verify_label_chars(env, str))
 	{
+		if (tmp[0] != LABEL_CHAR)
+		{
+			printf("Error[%d]: Invalid instruction at <%s>\n", env->line_counter, str);
+			// free
+			exit(0);
+		}
 		env->label_already_checked = 1;
-		// printf("<%s> is a label\n", str);
-		
+		printf("<%s> is a label\n", str);
 		ft_strdel(&str);
 		check_if_operation(ft_strtrim(op + i), env);
 	}
 	else
 	{
-		
+
 		printf("Syntax Error[%d]: Operation <%s> not found\n", env->line_counter, str);
 		// free
 		// ft_strdel(&tmp);

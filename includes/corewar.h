@@ -25,6 +25,13 @@
 #define	IS_COMMENT_CHAR(X) (X == ALT_COMMENT_CHAR || X == COMMENT_CHAR)
 #define	BGN_DATA (4 + PROG_NAME_LENGTH + 4 + 4 + COMMENT_LENGTH + 4)
 /* HEADER + NAME + NULL + EXEC_SZ + COMMENT + NULL */
+
+typedef enum			e_boolean
+{
+	FALSE,
+	TRUE,
+}						t_boolean;
+
 typedef struct s_op{
 	char *op_name;
 	int arg_len;
@@ -88,6 +95,7 @@ typedef struct	s_env
 	int			label_already_checked;
 	int			line_counter;
 	t_op		*found_op;
+	char		*sub_op;
 
 	// checking vars
 }				t_env;
@@ -113,6 +121,7 @@ int		is_label_operation_in_same_line(char *line);
 int		ft_empty_or_comment_line(char *str);
 int		create_file(char *s, t_env *env);
 
+t_boolean	ft_atoll(const char *str);
 
 unsigned char	set_args_octet(char *line);
 void    organize_beginning_data(t_env *env);

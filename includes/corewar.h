@@ -95,7 +95,6 @@ typedef struct	s_env
 	int			label_already_checked;
 	int			line_counter;
 	t_op		*found_op;
-	char		*sub_op;
 
 	// checking vars
 }				t_env;
@@ -129,7 +128,7 @@ void	tokenize_data(t_env *env);
 void	translate_data_to_code(t_env *env);
 void	write_beginning_data(t_env *env);
 void	write_bytecode_in_file(t_env *env);
-void	ft_command_not_found(char *trimed_line, t_env *env);
+void	ft_command_not_found(char **trimed_line,  char **regular_line, t_env *env);
 void	check_if_operation(char *op, t_env *env);
 
 char	**ft_split_whitespaces(char *str);

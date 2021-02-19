@@ -181,17 +181,21 @@ int check_name_comment_flag(t_env *env)
 	return (env->check_name && env->check_comment);
 }
 
-void ft_error_found_before_item(char *str, t_env *env, char *item)
+void ft_error_found_before_item(char **str, char **line, t_env *env, char *item)
 {
 
-	printf("Error[%d]: <%s> has been found before %s\n", env->line_counter, str, item);
+	printf("Error[%d]: <%s> has been found before %s\n", env->line_counter, *str, item);
+	ft_strdel(str);
+	ft_strdel(line);
 	// free the pointer to struct
 	exit(0);
 }
 
-void ft_command_not_found(char *trimed_line, t_env *env)
+void ft_command_not_found(char **trimed_line,  char **regular_line, t_env *env)
 {
-	printf("Syntax Error[%d]: Command <%s> not found\n", env->line_counter, trimed_line);
+	printf("Syntax Error[%d]: Command <%s> not found\n", env->line_counter, *trimed_line);
+	ft_strdel(trimed_line);
+	ft_strdel(regular_line);
 	// free line,...
 	exit(0);
 }
@@ -216,7 +220,7 @@ void organize_beginning_data(t_env *env)
 		}
 		if (trimed_line[0] == '.' && !str_begins_with(trimed_line, NAME_CMD_STRING) &&
 			!str_begins_with(trimed_line, COMMENT_CMD_STRING))
-			ft_command_not_found(trimed_line, env);
+			ft_command_not_found(&trimed_line, &regular_line, env);
 		// check ordinary lines
 		if (str_begins_with(trimed_line, NAME_CMD_STRING))
 		{
@@ -231,15 +235,14 @@ void organize_beginning_data(t_env *env)
 		else
 		{
 			if (!env->check_name && env->check_comment)
-				ft_error_found_before_item(trimed_line, env, "name");
+				ft_error_found_before_item(&trimed_line, &regular_line, env, "name");
 			else if (!env->check_comment && env->check_name)
-				ft_error_found_before_item(trimed_line, env, "comment");
+				ft_error_found_before_item(&trimed_line, &regular_line, env, "comment");
 			else if (!env->check_comment && !env->check_name)
-				ft_error_found_before_item(trimed_line, env, "name and comment");
+				ft_error_found_before_item(&trimed_line, &regular_line, env, "name and comment");
 		}
 		if (check_name_comment_flag(env))
 		{
-			ft_strdel(&regular_line);
 			ft_strdel(&regular_line);
 			ft_strdel(&trimed_line);
 			break;

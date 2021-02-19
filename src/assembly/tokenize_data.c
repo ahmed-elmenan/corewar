@@ -440,7 +440,7 @@ void tokenize_data(t_env *env)
 			continue;
 		}
 		if (trimed_line[0] == '.')
-			ft_command_not_found(trimed_line, env);
+			ft_command_not_found(&trimed_line, &line, env);
 		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 && !trimed_line[char_pos + 1])
 		{
 			env->label_already_checked = 1;

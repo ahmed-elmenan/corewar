@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   free_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aybouras <aybouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/19 20:25:43 by anel-bou          #+#    #+#             */
-/*   Updated: 2020/03/14 18:56:23 by anel-bou         ###   ########.fr       */
+/*   Created: 2020/02/10 12:46:23 by aybouras          #+#    #+#             */
+/*   Updated: 2020/12/22 11:29:46 by aybouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include <string.h>
-# include <stdlib.h>
-# include <fcntl.h>
-# include <unistd.h>
-#include "../libft/libft.h"
+void		free_2d(char **array, int len)
+{
+	int row;
 
-# define BUFF_SIZE 32
-
-int		get_next_line(const int fd, char **line);
-
-#endif
+	row = 0;
+	if (array)
+	{
+		while (row < len)
+		{
+			ft_strdel(&array[row]);
+			row++;
+		}
+		free(array);
+		array = NULL;
+	}
+}

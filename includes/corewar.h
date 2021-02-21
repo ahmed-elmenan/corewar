@@ -94,7 +94,12 @@ typedef struct	s_env
 	int			check_comment;
 	int			label_already_checked;
 	int			line_counter;
+	int			line_counter_tmp;
 	t_op		*found_op;
+	char		*save_op;
+	char		*sub_op;
+	char		*joinned_str;
+	int			quotes_index;
 
 	// checking vars
 }				t_env;
@@ -119,7 +124,7 @@ int		is_args_octet_present(int op);
 int		is_label_operation_in_same_line(char *line);
 int		ft_empty_or_comment_line(char *str);
 int		create_file(char *s, t_env *env);
-
+int		check_line(char *trimed_line, char *regular_line);
 t_boolean	ft_atoll(const char *str);
 
 unsigned char	set_args_octet(char *line);
@@ -128,9 +133,10 @@ void	tokenize_data(t_env *env);
 void	translate_data_to_code(t_env *env);
 void	write_beginning_data(t_env *env);
 void	write_bytecode_in_file(t_env *env);
-void	ft_command_not_found(char **trimed_line,  char **regular_line, t_env *env);
-void	check_if_operation(char *op, t_env *env);
-
+void	ft_command_not_found(char *trimed_line,  char *regular_line, t_env *env);
+void	check_if_operation_or_label(char *op, t_env *env);
+void	free_2d(char **array, int len);
+void	free_pointers(char *trimed_line, char *line);
 char	**ft_split_whitespaces(char *str);
 
 

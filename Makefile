@@ -21,6 +21,7 @@ ASSEMBLY_FILES = is_input_correct.c\
 				translate_data_to_code.c\
 				analyze_line.c\
 				ft_atoll.c\
+				free_2d.c\
 				get_operation_info.c\
 				get_arguments_info.c\
 				create_file.c\

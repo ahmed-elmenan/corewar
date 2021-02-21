@@ -1,18 +1,18 @@
-
+    
 .name           "champion executable"#commentaire
 .comment        "men neyytk
  bag
  hi
  terb
  e7n
- i ?    ";dfdf#wa33333
+ i ?    "    #;dfdf#wa33333
  
 tirf: ld	%0, r16
 	zjmp %:tirb
 	live	%42
 
 
-ld:    	
+lqsd:    	
 	add	r3,r4,r3
     sti	r1,r1,%1
     ld	%1,r5
@@ -25,6 +25,7 @@ sti:	live	%42
 	zjmp	%:tirop
 	ld	%0,r11
 					fork	%:tirf
+#	and r10,  R2,%2 
 	live	%42
 	sti r10,%-510,%0
 	sti r10,%-404,%0

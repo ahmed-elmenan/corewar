@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/11 15:41:09 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/21 18:23:19 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ typedef struct	s_env
 	char		*sub_op;
 	char		*joinned_str;
 	int			quotes_index;
+	char		*trimed_line;
+
 
 	// checking vars
 }				t_env;

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/10 18:50:52 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/21 18:24:28 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,16 @@ void extract_multiline_string(t_env *env, int item_length,
 	store_string_item(env, item, item_length, item_container);
 }
 
-void extract_signleline_string(t_env *env, char *str, int i, int item_length, char (*item_container)[item_length], char *item)
+void extract_signleline_string(t_env *env, int item_length, char (*item_container)[item_length], char *item)
 {
 	int j;
 
-	check_string_length(env, ft_strlen(str) - 2, item_length, item);
-	j = i;
-	++i;
-	while (str[++j] && str[j] != '"')
+	check_string_length(env, ft_strlen(env->trimed_line) - 2, item_length, item);
+	j = env->i;
+	++env->i;
+	while (env->trimed_line[++j] && env->trimed_line[j] != '"')
 		;
-	ft_strncpy(*item_container, &str[i], j - i);
+	ft_strncpy(*item_container, &env->trimed_line[env->i], j - env->i);
 }
 
 void content_not_found_error(char *item, t_env *env)
@@ -149,24 +149,23 @@ void content_not_found_error(char *item, t_env *env)
 	exit(0);
 }
 
-void set_champ_info(t_env *env, char *str, int item_length, char (*item_container)[item_length], char *item)
+void set_champ_info(t_env *env, int item_length, char (*item_container)[item_length], char *item)
 {
-	int i;
 	char *content_arr;
 	char *tmp;
 	int last_quotes_index;
 
-	i = -1;
-	while (str[++i] && str[i] != '"')
+	env->i = -1;
+	while (env->trimed_line[++env->i] && env->trimed_line[env->i] != '"')
 		;
-	if (i == ft_strlen(str))
+	if (env->i == ft_strlen(env->trimed_line))
 		content_not_found_error(item, env);
-	if (ft_strequ(str + i, "\"\""))
+	if (ft_strequ(env->trimed_line + env->i, "\"\""))
 	{
 		(*item_container)[0] = '\0';
 		return;
 	}
-	env->joinned_str = str + i + 1;
+	env->joinned_str = env->trimed_line + env->i + 1;
 	if ((last_quotes_index = char_index(env->joinned_str, '"')) >= 0)
 	{
 		check_characters_after_last_quotes(env, env->joinned_str + last_quotes_index + 1, item, env->line_counter);
@@ -174,8 +173,8 @@ void set_champ_info(t_env *env, char *str, int item_length, char (*item_containe
 	}
 	if (env->joinned_str[ft_strlen(env->joinned_str) - 1] != '"') // find another solution here
 		extract_multiline_string(env, item_length, item_container, item);
-	else // single line in stirng name
-		extract_signleline_string(env, str, i, item_length, item_container, item);
+	else
+		extract_signleline_string(env, item_length, item_container, item);
 }
 
 void ft_check_name_and_comment_existence(int checker, char *item)
@@ -234,22 +233,22 @@ void is_not_name_or_comment(t_env *env, char *trimed_line, char *regular_line)
 								   "name and comment");
 }
 
-void ft_header_operations(t_env *env, char *trimed_line, char *regular_line)
+void ft_header_operations(t_env *env, char *regular_line)
 {
-	if (str_begins_with(trimed_line, NAME_CMD_STRING))
+	if (str_begins_with(env->trimed_line, NAME_CMD_STRING))
 	{
-		set_champ_info(env, trimed_line, PROG_NAME_LENGTH, &env->hdr.prog_name,
+		set_champ_info(env, PROG_NAME_LENGTH, &env->hdr.prog_name,
 					   "name");
 		env->check_name |= 1;
 	}
-	else if (str_begins_with(trimed_line, COMMENT_CMD_STRING))
+	else if (str_begins_with(env->trimed_line, COMMENT_CMD_STRING))
 	{
-		set_champ_info(env, trimed_line, COMMENT_LENGTH, &env->hdr.comment,
+		set_champ_info(env, COMMENT_LENGTH, &env->hdr.comment,
 					   "comment");
 		env->check_comment |= 1;
 	}
 	else
-		is_not_name_or_comment(env, trimed_line, regular_line);
+		is_not_name_or_comment(env, env->trimed_line, regular_line);
 }
 
 int check_line(char *trimed_line, char *regular_line)
@@ -286,27 +285,26 @@ unsigned int initialize_magic_header()
 void organize_beginning_data(t_env *env)
 {
 	char *regular_line;
-	char *trimed_line;
 
 	env->hdr.magic = initialize_magic_header();
 	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
 		env->line_counter += 1;
-		trimed_line = ft_strtrim(regular_line);
-		if (check_line(trimed_line, regular_line))
+		env->trimed_line = ft_strtrim(regular_line);
+		if (check_line(env->trimed_line, regular_line))
 			continue;
-		if (check_command(trimed_line))
-			ft_command_not_found(trimed_line, regular_line, env);
-		ft_header_operations(env, trimed_line, regular_line);
+		if (check_command(env->trimed_line))
+			ft_command_not_found(env->trimed_line, regular_line, env);
+		ft_header_operations(env, regular_line);
 		if (check_name_comment_flag(env))
 		{
-			free_pointers(trimed_line, regular_line);
+			free_pointers(env->trimed_line, regular_line);
 			break;
 		}
-		free_pointers(trimed_line, regular_line);
+		free_pointers(env->trimed_line, regular_line);
 	}
-	// printf("name = %s\n", env->hdr.prog_name);
-	// printf("comment = %s\n", env->hdr.comment);
+	printf("name = %s\n", env->hdr.prog_name);
+	printf("comment = %s\n", env->hdr.comment);
 	ft_check_name_and_comment_existence(env->check_name, "name");
 	ft_check_name_and_comment_existence(env->check_comment, "comment");
 }

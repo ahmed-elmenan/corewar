@@ -1,8 +1,0 @@
-1 reg
-2 dir
-3 reg dir
-6 dir ind 
-7 reg dir ind
-
-no 5 because
-there is no reg ind

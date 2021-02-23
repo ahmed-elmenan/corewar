@@ -1,0 +1,6 @@
+*.o
+asm
+*.cor
+**/.DS_Store
+**/*.a
+**/*.out

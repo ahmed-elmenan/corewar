@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:35 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/16 15:08:25 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/28 16:19:03 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int		main(int ac, char **av)
 			return (-1);
 		organize_beginning_data(env);
 		tokenize_data(env);
-		// /* is_input_correct() */
-		// translate_data_to_code(env);
-		// create_file(av[ac-1], env);
-		// env->sup = 0;
-		// write_bytecode_in_file(env);
+		/* is_input_correct() */
+		translate_data_to_code(env);
+		create_file(av[ac-1], env);
+		env->sup = 0;
+		write_bytecode_in_file(env);
 	}
 
 // 	printf("____________________________________\n____________________________________\n");

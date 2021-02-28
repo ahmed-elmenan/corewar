@@ -9,7 +9,7 @@
 arriere:	ld	%-5, r5
 		ld	%1024,r4
 arriere2:	ld	%-5, r3
-arriere_live:	live %42
+arriere_live:	live %live_live
 		sti	r4, %:arriere, r3
 		add	r3, r5, r3
 		sti	r4, %:arriere, r3

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/23 03:27:50 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/28 18:16:07 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	save_line(t_env *env, char *line, int *current_bytes)
 {
 	int i;
-
 	env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
 	env->dt = env->dt->next;
-	env->dt->line = line;
+	env->dt->line = ft_strdup(line); // ahmed added ft_strdup
 	env->dt->current_octets = *current_bytes;
+	printf("|line = %s|\n", line);
 	if (is_label(line))
 	{
 		save_label_position(line, *current_bytes, env);

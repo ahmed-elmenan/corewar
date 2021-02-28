@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_binary_search.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:42:17 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/23 01:42:33 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/02/28 16:18:22 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_binary_search(char *tab, char c)
 	int res;
 
 	start = 0;
-	end = strlen(tab) - 1;
+	end = ft_strlen(tab) - 1;
 	mid = 0;
 	while (start <= end)
 	{
@@ -49,7 +49,7 @@ int	ft_binary_search_2d(t_env *env, char *operation, t_op tab[16])
 	while (start <= end)
 	{
 		mid = (start + end) / 2;
-		res = strcmp(operation, tab[mid].op_name);
+		res = ft_strcmp(operation, tab[mid].op_name);
 		if (!res)
 		{
 			env->found_op = &tab[mid];

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_and_label_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:02:40 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/23 03:28:53 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:19:35 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int		is_label_operation_in_same_line(char *line)
 	int i;
 
 	i = 0;
-	while (line[i] && !IS_COMMENT_CHAR(line[i]) && line[i] != LABEL_CHAR)
+	while (line[i] && !is_comment_char(line[i]) && line[i] != LABEL_CHAR)
 		i++;
 	line[i] == LABEL_CHAR ? i++ : 0;
-	while (IS_SPACE(line[i]))
+	while (is_space(line[i]))
 		i++;
 	if (is_operation(&line[i]))
 		return (i);

@@ -6,21 +6,19 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 11:22:36 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 15:03:56 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:24:25 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
-
 
 int		get_first_char_index(char *str)
 {
 	int i;
 
 	i = -1;
-	write(1, &str[++i], 1);
-	i = -1;
-	while (str[++i] && !IS_COMMENT_CHAR(str[i]) && (str[i] == ' ' || str[i] == '\t'))
+	while (str[++i] && !is_comment_char(str[i]) &&
+								(str[i] == ' ' || str[i] == '\t'))
 		;
 	return (i);
 }
@@ -36,15 +34,15 @@ int		get_operation_len(char *line)
 	(!op_len && str_begins_with(line, "ld")) ? op_len = 2 : 0;
 	(!op_len && str_begins_with(line, "sti")) ? op_len = 3 : 0;
 	(!op_len && str_begins_with(line, "st")) ? op_len = 2 : 0;
-	(!op_len && str_begins_with(line, "live")) ? op_len = 4: 0;
+	(!op_len && str_begins_with(line, "live")) ? op_len = 4 : 0;
 	(!op_len && str_begins_with(line, "add")) ? op_len = 3 : 0;
-	(!op_len && str_begins_with(line, "sub")) ? op_len = 3: 0;
-	(!op_len && str_begins_with(line, "and")) ? op_len = 3: 0;
-	(!op_len && str_begins_with(line, "or")) ? op_len = 2: 0;
+	(!op_len && str_begins_with(line, "sub")) ? op_len = 3 : 0;
+	(!op_len && str_begins_with(line, "and")) ? op_len = 3 : 0;
+	(!op_len && str_begins_with(line, "or")) ? op_len = 2 : 0;
 	(!op_len && str_begins_with(line, "xor")) ? op_len = 3 : 0;
 	(!op_len && str_begins_with(line, "zjmp")) ? op_len = 4 : 0;
-	(!op_len && str_begins_with(line, "fork")) ? op_len = 4: 0;
-	(!op_len && str_begins_with(line, "lfork")) ? op_len = 5: 0;
+	(!op_len && str_begins_with(line, "fork")) ? op_len = 4 : 0;
+	(!op_len && str_begins_with(line, "lfork")) ? op_len = 5 : 0;
 	(!op_len && str_begins_with(line, "aff")) ? op_len = 3 : 0;
 	return (op_len);
 }
@@ -69,7 +67,7 @@ int		get_operation_code(char *line)
 	(!op_code && str_begins_with(line, "zjmp")) ? op_code = 0x09 : 0;
 	(!op_code && str_begins_with(line, "fork")) ? op_code = 0x0c : 0;
 	(!op_code && str_begins_with(line, "lfork")) ? op_code = 0x0f : 0;
-	(!op_code && str_begins_with(line, "aff")) ? op_code =  0x010: 0;
+	(!op_code && str_begins_with(line, "aff")) ? op_code = 0x010 : 0;
 	return (op_code);
 }
 
@@ -78,7 +76,7 @@ int		get_operation_size(char *line)
 	int i;
 	int opr_code;
 	int	opr_size;
-	
+
 	opr_size = 1;
 	i = get_first_char_index(line);
 	opr_code = get_operation_code(&line[i]);

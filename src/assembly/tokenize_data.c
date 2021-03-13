@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 14:54:29 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:15:49 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	save_line(t_env *env, char *line, int *current_bytes)
 {
 	int i;
+
 	env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
 	env->dt = env->dt->next;
 	env->dt->line = ft_strdup(line); // ahmed added ft_strdup
 	env->dt->current_octets = *current_bytes;
-	// printf("|line = %s|\n", line);
 	if (is_label(line))
 	{
 		save_label_position(line, *current_bytes, env);
@@ -38,7 +38,7 @@ void	verify_item_name(char *op, int i, int *is_op, t_env *env)
 	int		args_len;
 
 	tmp = op + i - 1;
-	if (ft_binary_search_2d(env, env->sub_op, op_tab) >= 0 &&
+	if (ft_binary_search_2d(env, env->sub_op, g_op_tab) >= 0 &&
 		tmp[0] != LABEL_CHAR)
 	{
 		operation_parsing(env, is_op, op, i);
@@ -68,7 +68,7 @@ void	check_if_operation_or_label(char *op, t_env *env)
 	is_op = 0;
 	i = skip_white_spaces_and_arg_chars(op);
 	env->sub_op = ft_strsub(op, 0, i);
-	if (IS_COMMENT_CHAR(env->sub_op[0]))
+	if (is_comment_char(env->sub_op[0]))
 	{
 		ft_strdel(&env->sub_op);
 		return ;

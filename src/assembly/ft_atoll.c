@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:41:30 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/23 01:41:57 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:19:35 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_boolean			ft_atoll(const char *str)
 	result = 0;
 	sign = 1;
 	index = 0;
-	while (IS_SPACE(str[index]))
+	while (is_space(str[index]))
 		index++;
 	if (str[index] == '-')
 	{

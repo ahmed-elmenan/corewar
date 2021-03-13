@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:48:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 15:38:36 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 17:51:23 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	delete_data(t_env *env)
 {
 	t_data *ptr;
 	t_data *nxt;
-	
+
 	ptr = env->data;
 	while (ptr)
 	{
@@ -24,7 +24,7 @@ void	delete_data(t_env *env)
 		// ft_memdel((void **)&(ptr->line));
 		ft_memdel((void **)&ptr);
 		ptr = nxt;
-	}	
+	}
 }
 
 void	delete_labels(t_env *env)

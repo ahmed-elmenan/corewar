@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:13:25 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/13 15:39:09 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:19:35 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		skip_white_spaces_and_arg_chars(char *str)
 	int i;
 
 	i = 0;
-	while (str[i] && !IS_SPACE(str[i]) &&
+	while (str[i] && !is_space(str[i]) &&
 			str[i] != LABEL_CHAR && str[i] != DIRECT_CHAR)
 		i++;
 	return (i);

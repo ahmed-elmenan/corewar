@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_errors_checker.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:43:22 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/23 01:51:11 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:19:35 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	check_characters_after_last_quotes(t_env *env, char *str,
 	i = -1;
 	tmp = ft_strtrim(str);
 	res = calculate_comment_index(tmp);
-	while (tmp[++i] && !IS_COMMENT_CHAR(tmp[i]))
+	while (tmp[++i] && !is_comment_char(tmp[i]))
 	{
-		if (IS_SPACE(tmp[i]))
+		if (is_space(tmp[i]))
 			continue;
 		else
 		{

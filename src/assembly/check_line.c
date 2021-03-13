@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:36:33 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/23 01:38:13 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:15:49 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	verify_single_label_in_line(t_env *env, char *trimed_line, int char_pos)
 
 int		ft_empty_or_comment_line(char *str)
 {
-	return (!str[0] || IS_COMMENT_CHAR(str[0]));
+	return (!str[0] || is_comment_char(str[0]));
 }

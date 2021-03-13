@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_data_to_code.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/28 19:02:15 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:30:58 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ void fill_node_by_operation(t_opr *opr, char *line, t_data *data, t_env *env)
 	opr->arg1 = get_argument_value(line, i, data, env);
 	while (line[i] && line[i] != SEPARATOR_CHAR)
 		i++;
-	i++;
+	line[i] ? i++ : 0;
 	while (line[i] && IS_SPACE(line[i]))
 		i++;
 	opr->arg2 = get_argument_value(line, i, data, env);
 	while (line[i] && line[i] != SEPARATOR_CHAR)
 		i++;
-	i++;
+	line[i] ? i++ : 0;
 	while (line[i] && IS_SPACE(line[i]))
 		i++;
 	opr->arg3 = get_argument_value(line, i, data, env);
@@ -136,7 +136,7 @@ void translate_data_to_code(t_env *env)
 	data = env->data;
 	while (data)
 	{
-			printf("data->line = %s\n", data->line);
+			// printf("data->line = %s\n", data->line);
 		i = 0;
 		if (is_operation(data->line) || (i = is_label_operation_in_same_line(data->line)))
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:35 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/28 16:19:03 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 12:52:51 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,26 @@ void	allocate_variables(t_env **env)
 	(*env) = (t_env *)ft_memalloc(sizeof(t_env));
 	(*env)->data = (t_data *)ft_memalloc(sizeof(t_data));
 	(*env)->bgn_data = (char *)ft_memalloc(sizeof(char) * BGN_DATA);
-	(*env)->champion = (char *)ft_memalloc(sizeof(char) * CHAMP_MAX_SIZE);
+	(*env)->champion = (char *)ft_memalloc(sizeof(char) * CHAMP_MAX_SIZE * 10);
 }
 
 int		main(int ac, char **av)
 {
 	t_env *env;
-	char *p = "vm_champs/champs/mortel.s";
+	char *p = "vm_champs/champs/barriere.s";
 	if (ac > 1 || 1)
 	{
 		allocate_variables(&env);
-		if (!open_file(av[ac-1], env))
+		if (!open_file(p, env))
 			return (-1);
 		organize_beginning_data(env);
 		tokenize_data(env);
 		/* is_input_correct() */
 		translate_data_to_code(env);
-		create_file(av[ac-1], env);
+		create_file(p, env);
 		env->sup = 0;
 		write_bytecode_in_file(env);
+		liberate_memory(env);
 	}
 
 // 	printf("____________________________________\n____________________________________\n");

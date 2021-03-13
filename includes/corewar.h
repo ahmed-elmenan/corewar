@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/28 16:39:36 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/06 16:01:52 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,5 +199,8 @@ void set_champ_info(t_env *env, int item_length,
 					char (*item_container)[item_length], char *item);
 unsigned char set_args_octet(char *line);
 char **ft_split_whitespaces(char *str);
+
+void	liberate_memory(t_env *env);
+
 
 #endif

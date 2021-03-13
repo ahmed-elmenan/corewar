@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:13:25 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/28 18:13:29 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:39:09 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ int		char_index(char *str, char c)
 
 void	free_pointers(char *trimed_line, char *line)
 {
-	ft_strdel(&line);
-	ft_strdel(&trimed_line);
+	// ft_strdel(&line);
+	// ft_strdel(&trimed_line);
 }
 
 int		skip_white_spaces_and_arg_chars(char *str)

@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 11:22:36 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/02/03 10:20:22 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 15:03:56 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		get_first_char_index(char *str)
 {
 	int i;
 
+	i = -1;
+	write(1, &str[++i], 1);
 	i = -1;
 	while (str[++i] && !IS_COMMENT_CHAR(str[i]) && (str[i] == ' ' || str[i] == '\t'))
 		;

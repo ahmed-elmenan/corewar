@@ -37,7 +37,8 @@ ASSEMBLY_FILES = is_input_correct.c\
 				get_arguments_info.c\
 				create_file.c\
 				write_bytecode.c\
-				liberate_memory.c
+				liberate_memory.c\
+				get_info.c
 
 OBJ_ASSEMBLY = $(addprefix $(OBJ_DIR)/, $(ASSEMBLY_FILES:%.c=%.o))
 

@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:22:24 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:34:32 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,6 @@ char			**ft_split_whitespaces(char *str);
 void			liberate_memory(t_env *env);
 int				is_comment_char(char x);
 int				is_space(char x);
+t_opr			*get_current_opr_node(t_env *env, t_opr *opr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:19:35 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/13 19:34:38 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,6 @@ void			fill_node_by_operation(t_opr *opr, char *line,
 	while (line[i] && is_space(line[i]))
 		i++;
 	opr->arg3 = get_argument_value(line, i, data, env);
-}
-
-t_opr			*get_current_opr_node(t_env *env, t_opr *opr)
-{
-	if (!env->opr)
-	{
-		env->opr = (t_opr *)ft_memalloc(sizeof(t_opr));
-		return (env->opr);
-	}
-	opr->next = (t_opr *)ft_memalloc(sizeof(t_opr));
-	return (opr->next);
 }
 
 void			translate_data_to_code(t_env *env)

@@ -1,3 +1,5 @@
+# dfdfdf
+
 .name "Barriere"
 .comment "Envoie des torpilles a l'avant et se protege avec des barrieres a l'avant et a l'arriere"
 
@@ -28,7 +30,7 @@ arriere_live:	live %live_live
 fork_arriere:	live	%42
 		fork	%:arriere
 		zjmp	%:fork_arriere
-
+         
 # On commence les lives en serie
 live_live:	live	%42	
 		sti	r1, %:live100, r9	
@@ -61,7 +63,7 @@ live_live:	live	%42
 		ld	%6,r9
 		and	r6,%0,r6
 		zjmp	%:live_live	
-		
+
 init:		fork	%:kmissile
 		live	%42
 		sti	r1, %:arriere_live, %1	
@@ -73,7 +75,7 @@ init:		fork	%:kmissile
 		ld	%1,r9
 		and	r6,%0,r6
 		zjmp	%:live_live
-	
+
 fork_live:	live	%42
 		fork	%:live100
 		live	%42	

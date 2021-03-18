@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   free_2d.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:46:23 by aybouras          #+#    #+#             */
-/*   Updated: 2021/03/13 16:06:18 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/18 15:07:22 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/corewar.h"
 
 void	free_2d(char **array, int len)
 {

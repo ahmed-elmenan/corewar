@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_errors_checker.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:43:22 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/13 19:19:35 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/18 14:59:45 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	check_characters_after_last_quotes(t_env *env, char *str,
 			printf("String <%s> has been found after %s ending quotes\n",
 					str, item);
 			free_pointers(tmp, tmp2);
-			ft_strdel(&str);
+			// ft_strdel(&str);
 			exit(0);
 		}
 	}

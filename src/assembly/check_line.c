@@ -3,21 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:36:33 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/13 19:15:49 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/18 19:03:51 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		check_line(char *trimed_line, char *regular_line)
+
+int		ft_empty_or_comment_line(char c)
 {
-	if (ft_empty_or_comment_line(trimed_line))
+	return (!c || is_comment_char(c));
+}
+
+int		ft_str_is_spaces(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if (!ft_empty_or_comment_line(str[i]) && !is_space(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int		check_line(char *regular_line)
+{
+	if (ft_str_is_spaces(regular_line))
 	{
 		ft_strdel(&regular_line);
-		ft_strdel(&trimed_line);
 		return (1);
 	}
 	return (0);
@@ -46,7 +65,5 @@ void	verify_single_label_in_line(t_env *env, char *trimed_line, int char_pos)
 	ft_strdel(&label);
 }
 
-int		ft_empty_or_comment_line(char *str)
-{
-	return (!str[0] || is_comment_char(str[0]));
-}
+
+

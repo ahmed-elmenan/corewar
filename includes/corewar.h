@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:34:32 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:57:39 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ int				is_arg_first_char(char *line, int i);
 int				is_input_correct(char *s);
 int				is_args_octet_present(int op);
 int				is_label_operation_in_same_line(char *line);
-int				ft_empty_or_comment_line(char *str);
+int				ft_empty_or_comment_line(char c);
 int				create_file(char *s, t_env *env);
-int				check_line(char *trimed_line, char *regular_line);
+int				check_line(char *regular_line);
 int				check_name_comment_flag(t_env *env);
 int				calculate_comment_index(char *str);
 int				verify_label_chars(t_env *env, char *label);
@@ -125,9 +125,7 @@ int				arr_len_2d(char **str);
 int				ft_is_string_number(char *str);
 int				char_index(char *str, char c);
 int				skip_white_spaces_and_arg_chars(char *str);
-int				ft_empty_or_comment_line(char *str);
 int				check_command(char *trimed_line);
-int				check_line(char *trimed_line, char *regular_line);
 int				calculate_comment_index(char *str);
 t_boolean		ft_atoll(const char *str);
 void			check_args_type(t_env *env, char **args);

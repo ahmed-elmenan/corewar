@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:15:49 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/18 18:58:39 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	save_line(t_env *env, char *line, int *current_bytes)
 
 	env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
 	env->dt = env->dt->next;
-	env->dt->line = ft_strdup(line); // ahmed added ft_strdup
+	env->dt->line = line;
 	env->dt->current_octets = *current_bytes;
 	if (is_label(line))
 	{
@@ -91,9 +91,9 @@ void	tokenize_data(t_env *env)
 	{
 		env->line_counter += 1;
 		env->label_already_checked = 0;
-		trimed_line = ft_strtrim(line);
-		if (check_line(trimed_line, line))
+		if (check_line(line))
 			continue;
+		trimed_line = ft_strtrim(line);
 		check_error_command(env, trimed_line, line);
 		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 &&
 			!trimed_line[char_pos + 1])
@@ -101,6 +101,6 @@ void	tokenize_data(t_env *env)
 		else
 			check_if_operation_or_label(trimed_line, env);
 		save_line(env, line, &current_bytes);
-		free_pointers(trimed_line, line);
+		ft_strdel(&trimed_line);
 	}
 }

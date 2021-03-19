@@ -5,7 +5,7 @@
 
 		and	r6, %0, r6
 		zjmp %:init
-
+wdwddfb
 # On bombarde derriere notre programme
 
 arriere:	ld	%-5, r5

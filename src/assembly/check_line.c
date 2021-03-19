@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:36:33 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/18 19:03:51 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/19 00:53:40 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_str_is_spaces(char *str)
 
 int		check_line(char *regular_line)
 {
-	if (ft_str_is_spaces(regular_line))
+	if (ft_empty_or_comment_line(regular_line[0]))
 	{
 		ft_strdel(&regular_line);
 		return (1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/18 18:58:39 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/19 01:12:15 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,22 +85,23 @@ void	tokenize_data(t_env *env)
 	int		i;
 
 	current_bytes = 0;
-	env->data->line = line;
+	// env->data->line = line;
 	env->dt = env->data;
 	while (get_next_line(env->src_file, &line))
 	{
 		env->line_counter += 1;
 		env->label_already_checked = 0;
-		if (check_line(line))
-			continue;
 		trimed_line = ft_strtrim(line);
+		if (check_line(trimed_line))
+			continue;
 		check_error_command(env, trimed_line, line);
 		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 &&
 			!trimed_line[char_pos + 1])
 			verify_single_label_in_line(env, trimed_line, char_pos);
 		else
 			check_if_operation_or_label(trimed_line, env);
-		save_line(env, line, &current_bytes);
-		ft_strdel(&trimed_line);
+		env->data->line = trimed_line;	
+		save_line(env, trimed_line, &current_bytes);
+		ft_strdel(&line);
 	}
 }

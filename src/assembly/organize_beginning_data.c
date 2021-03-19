@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize_beginning_data.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/18 17:11:57 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/19 00:47:46 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ void			organize_beginning_data(t_env *env)
 	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
 		env->line_counter += 1;
-		if (check_line(regular_line))
-			continue ;
 		env->trimed_line = ft_strtrim(regular_line);
+		if (check_line(env->trimed_line))
+			continue ;
 		if (check_command(env->trimed_line))
 			ft_command_not_found(env->trimed_line, regular_line, env);
 		ft_header_operations(env, regular_line);

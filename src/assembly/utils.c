@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:13:25 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/18 16:48:22 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/20 16:50:08 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		char_index(char *str, char c)
 
 void	free_pointers(char *trimed_line, char *line)
 {
-	ft_strdel(&line);
+	// ft_strdel(&line);
 	ft_strdel(&trimed_line);
 }
 

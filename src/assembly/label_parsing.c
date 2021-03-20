@@ -6,29 +6,35 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 02:58:33 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/18 14:59:40 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/19 17:51:32 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-void	save_label_position(char *line, int current_bytes, t_env *env)
+void    save_label_position(char *line, int current_bytes, t_env *env)
 {
-	int i;
-	int j;
-
-	if (!env->label)
-	{
-		env->label = (t_label *)ft_memalloc(sizeof(t_label));
-		env->lbl = env->label;
-	}
-	else
-	{
-		env->lbl->next = (t_label *)ft_memalloc(sizeof(t_label));
-		env->lbl = env->lbl->next;
-	}
-	env->lbl->label_name = "label";
-	env->lbl->label_position = current_bytes;
+    int i;
+    int j;
+    j = -1;
+    while (is_space(line[++j]))
+        ;
+    j != 0 ? --j : 0;
+    i = j - 1;
+    while (line[++i] && line[i] != LABEL_CHAR)
+        ;
+    if (!env->label)
+    {
+        env->label = (t_label *)ft_memalloc(sizeof(t_label));
+        env->lbl = env->label;
+    }
+    else
+    {
+        env->lbl->next = (t_label *)ft_memalloc(sizeof(t_label));
+        env->lbl = env->lbl->next;
+    }
+    env->lbl->label_name = ft_strsub(line, j, i);
+    env->lbl->label_position = current_bytes;
 }
 
 void	label_parsing(t_env *env, char *str, char *tmp)

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:07:38 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/18 14:59:37 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/19 18:18:50 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void	operation_parsing(t_env *env, int *is_op, char *op, int i)
 void	check_args_type(t_env *env, char **args)
 {
 	int		i;
+	int		comment_index;
 	char	*trimed_str;
+	char	*tmp;
 
 	i = -1;
 	while (args[++i])
@@ -55,6 +57,15 @@ void	check_args_type(t_env *env, char **args)
 			ft_strdel(&trimed_str);
 			exit(0);
 		}
+		if ((comment_index = char_index(trimed_str, COMMENT_CHAR)) >= 0 ||
+            (comment_index = char_index(trimed_str, ALT_COMMENT_CHAR)) >= 0)
+        {
+            tmp = trimed_str;
+            trimed_str[comment_index] = 0;
+            trimed_str = ft_strtrim(trimed_str);
+            ft_strdel(&tmp);
+        }
+		
 		check_argument_value(env, trimed_str);
 		ft_strdel(&trimed_str);
 	}

@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/asm",
-            "args": ["qwer.s"],
+            "args": ["barriere.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

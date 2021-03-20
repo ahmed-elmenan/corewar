@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/18 18:57:39 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/20 18:49:12 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ typedef struct	s_env
 	int			dst_file;
 	int			current_size;
 	int			i;
+	int			x;
 	int			check_name;
 	int			check_comment;
 	int			label_already_checked;
@@ -94,6 +95,7 @@ typedef struct	s_env
 	char		*joinned_str;
 	int			quotes_index;
 	char		*trimed_line;
+	char		*label_as_arg;
 }				t_env;
 
 int				get_operation_code(char *line);

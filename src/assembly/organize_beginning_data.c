@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   organize_beginning_data.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/19 00:47:46 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/20 18:52:00 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-void			store_string_item(t_env *env, char *item,
-	int item_length, char (*item_container)[item_length])
+void store_string_item(t_env *env, char *item,
+					   int item_length, char (*item_container)[item_length])
 {
 	check_missing_last_quotes_error(env, item, env->quotes_index);
 	env->line_counter = env->line_counter_tmp;
@@ -22,27 +22,27 @@ void			store_string_item(t_env *env, char *item,
 	ft_memdel((void **)&env->joinned_str);
 }
 
-void			set_champ_info(t_env *env, int item_length,
-			char (*item_container)[item_length], char *item)
+void set_champ_info(t_env *env, int item_length,
+					char (*item_container)[item_length], char *item)
 {
-	char	*content_arr;
-	char	*tmp;
-	int		last_quotes_index;
+	char *content_arr;
+	char *tmp;
+	int last_quotes_index;
 
-	env->i = -1;
-	while (env->trimed_line[++env->i] && env->trimed_line[env->i] != '"')
+	env->x = -1;
+	while (env->trimed_line[++env->x] && env->trimed_line[env->x] != '"')
 		;
-	if (env->i == ft_strlen(env->trimed_line))
+	if (env->x == ft_strlen(env->trimed_line))
 		content_not_found_error(item, env);
-	if (ft_strequ(env->trimed_line + env->i, "\"\"") &&
+	if (ft_strequ(env->trimed_line + env->x, "\"\"") &&
 		((*item_container)[0] = '\0'))
-		return ;
-	env->joinned_str = env->trimed_line + env->i + 1;
+		return;
+	env->joinned_str = env->trimed_line + env->x + 1;
 	if ((last_quotes_index = char_index(env->joinned_str, '"')) >= 0)
 	{
 		check_characters_after_last_quotes(env,
-						env->joinned_str + last_quotes_index + 1,
-						item, env->line_counter);
+										   env->joinned_str + last_quotes_index + 1,
+										   item, env->line_counter);
 		env->joinned_str[last_quotes_index + 1] = '\0';
 	}
 	if (env->joinned_str[ft_strlen(env->joinned_str) - 1] != '"')
@@ -51,15 +51,16 @@ void			set_champ_info(t_env *env, int item_length,
 		extract_signleline_string(env, item_length, item_container, item);
 }
 
-void			organize_beginning_data(t_env *env)
+void organize_beginning_data(t_env *env)
 {
 	char *regular_line;
 
-	env->hdr.magic = (((COREWAR_EXEC_MAGIC & 0xff) << 24) |
-					(COREWAR_EXEC_MAGIC << 8 & 0xff0000) |
-					(COREWAR_EXEC_MAGIC >> 8 & 0xff00));
+	env->hdr.magic = ((COREWAR_EXEC_MAGIC & 0xff) << 24) |
+					 (COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
 	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
+
+		printf("org-line = %s\n", regular_line);
 		env->line_counter += 1;
 		env->trimed_line = ft_strtrim(regular_line);
 		if (check_line(env->trimed_line))
@@ -70,19 +71,24 @@ void			organize_beginning_data(t_env *env)
 		if (check_name_comment_flag(env))
 		{
 			free_pointers(env->trimed_line, regular_line);
-			break ;
+			break;
 		}
+		// ft_strdel(&regular_line);
 		free_pointers(env->trimed_line, regular_line);
 	}
+	
 	check_name_and_comment_existence(env->check_name, "name");
 	check_name_and_comment_existence(env->check_comment, "comment");
 }
 
-void			write_beginning_data(t_env *env)
+void write_beginning_data(t_env *env)
 {
 	int null;
 
 	null = 0;
+	printf("mh = |%d|\n", env->hdr.magic);
+	printf("name = |%s|\n", env->hdr.prog_name);
+	printf("comment = |%s|\n", env->hdr.comment);
 	write(env->dst_file, &(env->hdr.magic), 4);
 	write(env->dst_file, &(env->hdr.prog_name), PROG_NAME_LENGTH);
 	write(env->dst_file, &null, 4);

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 02:09:56 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/18 16:25:25 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/20 18:50:01 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void		extract_multiline_string(t_env *env, int item_length,
 	env->line_counter_tmp = env->line_counter;
 	while (get_next_line(env->src_file, &line) > 0)
 	{
+		
 		env->line_counter_tmp++;
 		tmp = env->joinned_str;
 		newline_str = ft_strjoin("\n", line);
@@ -51,11 +52,11 @@ void		extract_signleline_string(t_env *env, int item_length,
 
 	check_string_length(env, ft_strlen(env->trimed_line) - 2,
 						item_length, item);
-	j = env->i;
-	++env->i;
+	j = env->x;
+	++env->x;
 	while (env->trimed_line[++j] && env->trimed_line[j] != '"')
 		;
-	ft_strncpy(*item_container, &env->trimed_line[env->i], j - env->i);
+	ft_strncpy(*item_container, &env->trimed_line[env->x], j - env->x);
 }
 
 void		is_not_name_or_comment(t_env *env, char *trimed_line,

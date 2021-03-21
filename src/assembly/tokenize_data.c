@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/20 18:23:03 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 11:29:26 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,11 @@ void	tokenize_data(t_env *env)
 	int		i;
 
 	current_bytes = 0;
-	// get_next_line(env->src_file, &line);
-	// get_next_line(env->src_file, &line);
 	get_next_line(env->src_file, &line);
 	env->data->line = line;
 	env->dt = env->data;
 	while (get_next_line(env->src_file, &line))
 	{
-	printf("token-line = %s\n", line);
 		env->line_counter += 1;
 		env->label_already_checked = 0;
 		trimed_line = ft_strtrim(line);
@@ -104,8 +101,7 @@ void	tokenize_data(t_env *env)
 			verify_single_label_in_line(env, trimed_line, char_pos);
 		else
 			check_if_operation_or_label(trimed_line, env);
-		// env->data->line = trimed_line;	
 		save_line(env, line, &current_bytes);
-		// ft_strdel(&line);
+		ft_strdel(&trimed_line);
 	}
 }

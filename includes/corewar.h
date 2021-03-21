@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/20 18:49:12 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 11:46:38 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ int				verify_label_chars(t_env *env, char *label);
 int				is_label_operation_in_same_line(char *line);
 int				ft_binary_search(char *tab, char c);
 int				ft_binary_search_2d(t_env *env, char *operation, t_op tab[16]);
-int				arr_len_2d(char **str);
+int				arr_len_2d(t_env *env, char **str);
 int				ft_is_string_number(char *str);
 int				char_index(char *str, char c);
 int				skip_white_spaces_and_arg_chars(char *str);
@@ -185,7 +185,6 @@ void			ft_header_operations(t_env *env, char *regular_line);
 void			set_champ_info(t_env *env, int item_length,
 							char (*item_container)[item_length], char *item);
 unsigned char	set_args_octet(char *line);
-char			**ft_split_whitespaces(char *str);
 void			liberate_memory(t_env *env);
 int				is_comment_char(char x);
 int				is_space(char x);

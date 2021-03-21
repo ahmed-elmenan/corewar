@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/20 18:52:00 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 11:49:35 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void organize_beginning_data(t_env *env)
 	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
 
-		printf("org-line = %s\n", regular_line);
 		env->line_counter += 1;
 		env->trimed_line = ft_strtrim(regular_line);
 		if (check_line(env->trimed_line))
@@ -86,9 +85,6 @@ void write_beginning_data(t_env *env)
 	int null;
 
 	null = 0;
-	printf("mh = |%d|\n", env->hdr.magic);
-	printf("name = |%s|\n", env->hdr.prog_name);
-	printf("comment = |%s|\n", env->hdr.comment);
 	write(env->dst_file, &(env->hdr.magic), 4);
 	write(env->dst_file, &(env->hdr.prog_name), PROG_NAME_LENGTH);
 	write(env->dst_file, &null, 4);

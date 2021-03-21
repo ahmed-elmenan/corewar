@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 15:26:06 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/20 18:53:17 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 10:52:09 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void write_octets(t_env *env, unsigned int num, int size)
 		size--;
 		(env->i)++;
 	}
-	// exit(0);
 }
 
 int get_arg_size(t_opr *opr, int shft)

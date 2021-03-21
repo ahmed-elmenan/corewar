@@ -1,7 +1,7 @@
 .name "Barriere"
 .comment "Envoie des torpilles a l'avant et se protege avec des barrieres a l'avant et a l'arriere"
 
-		and	r6, %0, r6
+		and	r6, , r6
 		zjmp %:init
 
 # On bombarde derriere notre programme
@@ -24,7 +24,8 @@ arriere_live:	live %42
 		zjmp	%:arriere2
 		and	r6, %0, r6
 		zjmp	%:arriere_live
-
+arriere:	ld	%-5, r5
+		ld	%1024,r4
 fork_arriere:	live	%42
 		fork	%:arriere
 		zjmp	%:fork_arriere

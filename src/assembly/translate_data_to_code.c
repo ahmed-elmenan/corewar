@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/20 16:40:23 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 11:49:28 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void fill_node_by_operation(t_opr *opr, char *line,
 	int i;
 
 	opr->enc_octet = 0;
-	// printf("-line = %s\n", data->line);
-
 	i = get_first_char_index(line);
 	opr->opr_code = get_operation_code(&line[i]);
 	if (is_args_octet_present(opr->opr_code))
@@ -112,12 +110,41 @@ void fill_node_by_operation(t_opr *opr, char *line,
 	opr->arg3 = get_argument_value(line, i, data, env);
 }
 
+void	check_duplicated_labels(t_env *env)
+{
+	t_label *label_to_search;
+	t_label *lbl_to_cmp;
+	int founded;
+
+	lbl_to_cmp = env->label;
+	while (lbl_to_cmp)
+	{
+		founded = 0;
+		label_to_search = env->label;
+		while(label_to_search)
+		{
+			if (ft_strequ(label_to_search->label_name, lbl_to_cmp->label_name))
+			{
+				if (founded)
+				{
+					printf("duplicated label founded\n");
+					exit(0);
+				}
+				founded++;
+			}
+			label_to_search = label_to_search->next;
+		}
+		lbl_to_cmp = lbl_to_cmp->next;
+	}
+}
+
 void translate_data_to_code(t_env *env)
 {
 	t_data *data;
 	t_opr *opr;
 	int i;
 
+	check_duplicated_labels(env);
 	data = env->data;
 	while (data)
 	{
@@ -126,7 +153,6 @@ void translate_data_to_code(t_env *env)
 		if (is_operation(data->line) ||
 			(i = is_label_operation_in_same_line(data->line)))
 		{
-			printf("oct = %d\n", data->current_octets);
 			opr = get_current_opr_node(env, opr);
 			fill_node_by_operation(opr, &(data->line)[i], data, env);
 		}

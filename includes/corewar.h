@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 11:46:38 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:01:07 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct	s_env
 	t_label		*label;
 	t_label		*lbl;
 	t_opr		*opr;
+	t_boolean	check_eof;
 	char		*bgn_data;
 	char		*champion;
 	int			src_file;
@@ -142,8 +143,6 @@ void			error_passing_indirect(t_env *env, char *str);
 void			error_reg_value_is_negative(t_env *env);
 void			error_reg_value_not_digit(t_env *env);
 void			error_value_contains_positive_sign(t_env *env, char *arg_type);
-void			error_overflow_or_underflow_int(t_env *env, char *arg_type);
-void			handle_int_errors(t_env *env, char *arg, char *arg_type);
 void			error_passing_direct(t_env *env, char c);
 void			error_passing_registry(t_env *env, char c);
 void			error_big_reg_value(t_env *env);

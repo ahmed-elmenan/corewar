@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:02:40 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 14:57:55 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:28:21 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ void check_argument_value(t_env *env, char *trimed_str)
 	}
 	else if (trimed_str[0] == DIRECT_CHAR)
 	{
-		printf("%s\n", trimed_str);
-		if (ft_isdigit(trimed_str[1]) || trimed_str[1] == '-' || trimed_str[1] == '+')
+		// printf("%s\n", trimed_str);
+		if (ft_is_string_number(trimed_str + 1) || trimed_str[1] == '-' || trimed_str[1] == '+')
 			handle_number_error(env, trimed_str, "Direct");
 		else if (trimed_str[1] == LABEL_CHAR && ft_isalnum(trimed_str[2]))
 		{
@@ -99,7 +99,7 @@ void check_argument_value(t_env *env, char *trimed_str)
 		}
 		else
 		{
-			printf("Lexical Error[%d]: <%s>\n", env->line_counter, trimed_str);
+			printf("Lexical Error[%d]: Argument contains inappropriate characters <%s>\n", env->line_counter, trimed_str);
 			exit(0);
 		}
 	}

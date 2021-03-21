@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:13:25 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 14:56:29 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:26:35 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int ft_is_string_number(char *str)
 	}
 	return (1);
 }
+
 
 int char_index(char *str, char c)
 {

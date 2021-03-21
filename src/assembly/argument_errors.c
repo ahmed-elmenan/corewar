@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:34:08 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/19 18:18:00 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 17:01:43 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,4 @@ void	handle_number_error(t_env *env, char *arg, char *arg_type)
 {
 	if (arg[1] == '+')
 		error_value_contains_positive_sign(env, arg_type);
-	if (ft_is_string_number(arg + 1))
-		handle_int_errors(env, arg, arg_type);
 }

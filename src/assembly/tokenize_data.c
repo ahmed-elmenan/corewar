@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 12:48:02 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:57:25 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	check_if_operation_or_label(char *op, t_env *env)
 	int		is_op;
 
 	is_op = 0;
+	env->check_eof = TRUE;
 	i = skip_white_spaces_and_arg_chars(op);
 	env->sub_op = ft_strsub(op, 0, i);
 	if (is_comment_char(env->sub_op[0]))
@@ -83,14 +84,19 @@ void	tokenize_data(t_env *env)
 	int		char_pos;
 	int		current_bytes;
 	int		i;
+	t_boolean flag;
 
+	env->check_eof = FALSE;
+	flag = FALSE;
 	current_bytes = 0;
-	env->line_counter += 1;
-	get_next_line(env->src_file, &line);
-	env->data->line = line;
 	env->dt = env->data;
 	while (get_next_line(env->src_file, &line))
 	{
+		if (!flag)
+		{
+			env->data->line = line;
+			flag = TRUE;
+		}
 		env->line_counter += 1;
 		env->label_already_checked = 0;
 		trimed_line = ft_strtrim(line);
@@ -105,4 +111,10 @@ void	tokenize_data(t_env *env)
 		save_line(env, line, &current_bytes);
 		ft_strdel(&trimed_line);
 	}
+	if (!env->check_eof)
+	{
+		printf("Syntax Error: File doesn't contain any label or operation\n");	
+		exit(0);
+	}
+	
 }

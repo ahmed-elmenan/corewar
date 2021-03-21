@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:36:33 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/19 00:53:40 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 16:38:28 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	verify_single_label_in_line(t_env *env, char *trimed_line, int char_pos)
 {
 	char *label;
 
+	env->check_eof = TRUE;
 	env->label_already_checked = 1;
 	label = ft_strsub(trimed_line, 0, char_pos);
 	verify_label_chars(env, label);

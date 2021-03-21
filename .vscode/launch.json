@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/asm",
-            "args": ["barriere.s"],
+            "args": ["vm_champs/champs/err/Backward.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

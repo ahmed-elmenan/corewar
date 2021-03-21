@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 11:29:26 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 12:48:02 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	tokenize_data(t_env *env)
 	int		i;
 
 	current_bytes = 0;
+	env->line_counter += 1;
 	get_next_line(env->src_file, &line);
 	env->data->line = line;
 	env->dt = env->data;

@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 11:49:28 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 13:13:19 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int get_label_position(char *line, t_env *env)
 	lbl = env->label;
 	while (lbl)
 	{
+		printf("|%s|\n", lbl->label_name);
 		if (ft_strncmp(line, lbl->label_name, i) == 0 &&
 			lbl->label_name[i] == 0)
 			return (lbl->label_position);

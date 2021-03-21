@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:07:38 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 11:58:22 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:51:41 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,14 @@ void	operation_parsing(t_env *env, int *is_op, char *op, int i)
 	char	*args_tmp;
 	char	**args;
 	int		args_len;
+	int		comment_index;
+	
 
 	*is_op = 1;
 	args_tmp = op + i - 1;
+	if ((comment_index = char_index(args_tmp, COMMENT_CHAR)) >= 0 ||
+            (comment_index = char_index(args_tmp, ALT_COMMENT_CHAR)) >= 0)
+            args_tmp[comment_index] = 0;
 	if (args_tmp[ft_strlen(args_tmp) - 1] == SEPARATOR_CHAR)
 	{
 		printf("Syntax Error[%d]: ", env->line_counter);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numbers_errors.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:00:02 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/23 03:00:05 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:59:20 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	error_value_contains_positive_sign(t_env *env, char *arg_type)
 
 void	error_overflow_or_underflow_int(t_env *env, char *arg_type)
 {
-	printf("Error[%d]: %s value is bigger or less than int limits\n",
-		env->line_counter, arg_type);
-	exit(0);
+	// printf("Error[%d]: %s value is bigger or less than int limits\n",
+	// 	env->line_counter, arg_type);
+	// exit(0);
 }
 
 void	handle_int_errors(t_env *env, char *arg, char *arg_type)

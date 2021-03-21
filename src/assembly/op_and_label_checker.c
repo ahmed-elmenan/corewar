@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:02:40 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/19 18:27:14 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/21 14:57:55 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,12 @@ void check_argument_value(t_env *env, char *trimed_str)
 	}
 	else if (trimed_str[0] == DIRECT_CHAR)
 	{
+		printf("%s\n", trimed_str);
 		if (ft_isdigit(trimed_str[1]) || trimed_str[1] == '-' || trimed_str[1] == '+')
 			handle_number_error(env, trimed_str, "Direct");
-		else if (trimed_str[1] == LABEL_CHAR && ft_isalpha(trimed_str[2]))
+		else if (trimed_str[1] == LABEL_CHAR && ft_isalnum(trimed_str[2]))
 		{
+			verify_label_chars(env, trimed_str + 2);
 		}
 		else
 		{
@@ -101,8 +103,11 @@ void check_argument_value(t_env *env, char *trimed_str)
 			exit(0);
 		}
 	}
-	else if (trimed_str[0] == LABEL_CHAR || ft_is_string_number(trimed_str))
+	else if (trimed_str[0] == LABEL_CHAR && ft_is_string_number(trimed_str))
 		handle_number_error(env, trimed_str, "Indirect");
+	// exit(0);
+	else if (trimed_str[0] == LABEL_CHAR && ft_isalnum(trimed_str[1]))
+		verify_label_chars(env, trimed_str + 1);
 }
 
 void check_passing_wrong_arg(t_env *env, char *trimed_str, int i)

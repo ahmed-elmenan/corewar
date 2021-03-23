@@ -1,3 +1,13 @@
+-----------------------------------------------------------------
+f='toto' && pt='vm_champs/champs' && ./asm $pt/$f.s && xxd $pt/$f.cor |pbcopy && rm -rf $pt/$f.cor
+-----------------------------------------------------------------
+f='toto' && pt='vm_champs/champs' && ./42asm $pt/$f.s && xxd $pt/$f.cor |pbcopy && rm -rf $pt/$f.cor
+-----------------------------------------------------------------
+
+Errors in:
+	+Car
+	
+
 makefile
 ft_printf
 my-getnext
@@ -5,3 +15,4 @@ author
 extern
 newline at the end
 file size
+fichier de correction

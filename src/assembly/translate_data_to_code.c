@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   translate_data_to_code.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 16:48:34 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/23 14:49:06 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void fill_node_by_operation(t_opr *opr, char *line,
 	opr->opr_code = get_operation_code(&line[i]);
 	if (is_args_octet_present(opr->opr_code))
 		opr->enc_octet = set_args_octet(&line[i]);
-	while (line[++i] && !is_space(line[i]))
+	while (line[++i] && !is_space(line[i]) && line[i + 1] != '%')
 		;
 	while (line[++i] && is_space(line[i]))
 		;

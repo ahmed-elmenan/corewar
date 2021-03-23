@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 11:24:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:32:14 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/23 14:49:42 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		get_all_arguments_size(char *line, int opr)
 
 	argums_size = 0;
 	i = -1;
-	while (line[++i] && (!is_space(line[i])))
+	while (line[++i] && (!is_space(line[i])) && line[i + 1] != '%')
 		;
 	while (is_space(line[i]))
 		i++;

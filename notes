@@ -8,18 +8,10 @@ f='h' && pt='vm_champs/champs/examples' && ./asm $pt/$f.s && xxd $pt/$f.cor > ou
 
 
 Errors in:
-Anas:
-	+ vm_champs/champs/championships/2017/adenis/Explosive_Kitty.s
-	+ vm_champs/champs/championships/2017/agregoir/Kittystrophic.s
-Ahmed:
-	+ vm_champs/champs/championships/2017/gnebie/ultima.s
-	
+
 
 makefile
 ft_printf
-my-get-next
 author
-extern
-newline at the end
 file size
 fichier de correction

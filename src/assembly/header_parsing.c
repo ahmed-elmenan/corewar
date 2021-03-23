@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 02:09:56 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/20 18:50:01 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:56:21 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void		extract_multiline_string(t_env *env, int item_length,
 	env->line_counter_tmp = env->line_counter;
 	while (get_next_line(env->src_file, &line) > 0)
 	{
-		
 		env->line_counter_tmp++;
 		tmp = env->joinned_str;
 		newline_str = ft_strjoin("\n", line);

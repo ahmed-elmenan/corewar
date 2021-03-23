@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/23 15:13:26 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:57:44 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ void set_champ_info(t_env *env, int item_length,
 void organize_beginning_data(t_env *env)
 {
 	char *regular_line;
-
+	int ret;
+	
 	env->hdr.magic = ((COREWAR_EXEC_MAGIC & 0xff) << 24) |
 					 (COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
-	while (get_next_line(env->src_file, &regular_line) > 0)
+	while ((ret = get_next_line(env->src_file, &regular_line)) > 0)
 	{
 
 		env->line_counter += 1;
@@ -79,7 +80,6 @@ void organize_beginning_data(t_env *env)
 		// ft_strdel(&regular_line);
 		free_pointers(env->trimed_line, regular_line);
 	}
-	
 	check_name_and_comment_existence(env->check_name, "name");
 	check_name_and_comment_existence(env->check_comment, "comment");
 }

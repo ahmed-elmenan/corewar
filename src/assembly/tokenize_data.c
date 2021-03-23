@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 16:57:25 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:50:32 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,12 +85,13 @@ void	tokenize_data(t_env *env)
 	int		current_bytes;
 	int		i;
 	t_boolean flag;
+	int ret;
 
 	env->check_eof = FALSE;
 	flag = FALSE;
 	current_bytes = 0;
 	env->dt = env->data;
-	while (get_next_line(env->src_file, &line))
+	while ((ret = get_next_line(env->src_file, &line)) > 0)
 	{
 		if (!flag)
 		{
@@ -110,6 +111,11 @@ void	tokenize_data(t_env *env)
 			check_if_operation_or_label(trimed_line, env);
 		save_line(env, line, &current_bytes);
 		ft_strdel(&trimed_line);
+		if (ret == 2)
+		{
+			printf("file doesn't end with a new line\n");
+			exit(0);
+		}
 	}
 	if (!env->check_eof)
 	{

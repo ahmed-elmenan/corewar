@@ -3,9 +3,16 @@ f='toto' && pt='vm_champs/champs' && ./asm $pt/$f.s && xxd $pt/$f.cor |pbcopy &&
 -----------------------------------------------------------------
 f='toto' && pt='vm_champs/champs' && ./42asm $pt/$f.s && xxd $pt/$f.cor |pbcopy && rm -rf $pt/$f.cor
 -----------------------------------------------------------------
+f='h' && pt='vm_champs/champs/examples' && ./asm $pt/$f.s && xxd $pt/$f.cor > out1 && ./42asm $pt/$f.s && xxd $pt/$f.cor > out2  && rm -rf $pt/$f.cor && diff out1 out2
+-----------------------------------------------------------------
+
 
 Errors in:
-	+Car
+Anas:
+	+ vm_champs/champs/championships/2017/adenis/Explosive_Kitty.s
+	+ vm_champs/champs/championships/2017/agregoir/Kittystrophic.s
+Ahmed:
+	+ vm_champs/champs/championships/2017/gnebie/ultima.s
 	
 
 makefile

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_binary_search.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:42:17 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/02/28 16:18:22 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/23 12:43:43 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	ft_binary_search_2d(t_env *env, char *operation, t_op tab[16])
 	int res;
 
 	start = 0;
-	end = 16;
+	end = 15;
 	mid = 0;
 	while (start <= end)
 	{

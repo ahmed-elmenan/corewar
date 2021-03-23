@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/asm",
-            "args": ["vm_champs/champs/err/leeloo.s"],
+            "args": ["vm_champs/champs/Oct.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

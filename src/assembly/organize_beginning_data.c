@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 11:49:35 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/23 15:05:30 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,30 @@ void set_champ_info(t_env *env, int item_length,
 	char *content_arr;
 	char *tmp;
 	int last_quotes_index;
+	int quotes_nb;
 
 	env->x = -1;
-	while (env->trimed_line[++env->x] && env->trimed_line[env->x] != '"')
-		;
+	quotes_nb = 0;
+	while (env->trimed_line[++env->x] && env->trimed_line[env->x] != '"' && (quotes_nb = 1))
+	{}
 	if (env->x == ft_strlen(env->trimed_line))
 		content_not_found_error(item, env);
 	if (ft_strequ(env->trimed_line + env->x, "\"\"") &&
 		((*item_container)[0] = '\0'))
 		return;
+	printf("env->trimed_line = %c\n", env->trimed_line[ft_strlen(env->trimed_line) - 1]);
 	env->joinned_str = env->trimed_line + env->x + 1;
+	
 	if ((last_quotes_index = char_index(env->joinned_str, '"')) >= 0)
 	{
+		quotes_nb++;
 		check_characters_after_last_quotes(env,
 										   env->joinned_str + last_quotes_index + 1,
 										   item, env->line_counter);
 		env->joinned_str[last_quotes_index + 1] = '\0';
 	}
-	if (env->joinned_str[ft_strlen(env->joinned_str) - 1] != '"')
+	printf("env->joinned_str = %s\n", env->joinned_str);
+	if (env->joinned_str[ft_strlen(env->joinned_str) - 1] != '"' || quotes_nb == 1)
 		extract_multiline_string(env, item_length, item_container, item);
 	else
 		extract_signleline_string(env, item_length, item_container, item);

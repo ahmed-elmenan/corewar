@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize_beginning_data.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/23 15:05:30 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/23 15:13:26 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void set_champ_info(t_env *env, int item_length,
 	if (ft_strequ(env->trimed_line + env->x, "\"\"") &&
 		((*item_container)[0] = '\0'))
 		return;
-	printf("env->trimed_line = %c\n", env->trimed_line[ft_strlen(env->trimed_line) - 1]);
 	env->joinned_str = env->trimed_line + env->x + 1;
 	
 	if ((last_quotes_index = char_index(env->joinned_str, '"')) >= 0)
@@ -50,7 +49,6 @@ void set_champ_info(t_env *env, int item_length,
 										   item, env->line_counter);
 		env->joinned_str[last_quotes_index + 1] = '\0';
 	}
-	printf("env->joinned_str = %s\n", env->joinned_str);
 	if (env->joinned_str[ft_strlen(env->joinned_str) - 1] != '"' || quotes_nb == 1)
 		extract_multiline_string(env, item_length, item_container, item);
 	else

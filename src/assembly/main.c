@@ -6,13 +6,13 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:35 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/22 16:56:33 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/23 16:10:50 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int		open_file(char *s, t_env *env)
+int open_file(char *s, t_env *env)
 {
 	if ((env->src_file = open(s, O_RDONLY)) == -1)
 	{
@@ -22,7 +22,7 @@ int		open_file(char *s, t_env *env)
 	return (1);
 }
 
-void	allocate_variables(t_env **env)
+void allocate_variables(t_env **env)
 {
 	(*env) = (t_env *)ft_memalloc(sizeof(t_env));
 	(*env)->data = (t_data *)ft_memalloc(sizeof(t_data));
@@ -30,12 +30,17 @@ void	allocate_variables(t_env **env)
 	(*env)->champion = (char *)ft_memalloc(sizeof(char) * CHAMP_MAX_SIZE * 10);
 }
 
-int		main(int ac, char **av)
+int main(int ac, char **av)
 {
-	t_env	*env;
+	t_env *env;
 
 	if (ac > 1 || 1)
 	{
+		if (av[1][ft_strlen(av[1]) - 1] != 's' || av[1][ft_strlen(av[1]) - 2] != '.')
+		{
+			printf("Error: The file <%s> is not a valid file it doesn't contain '.s' extension\n", av[1]);
+			exit(0);
+		}
 		allocate_variables(&env);
 		if (!open_file(av[ac - 1], env))
 			return (-1);

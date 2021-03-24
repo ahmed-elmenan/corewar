@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/asm",
-            "args": ["vm_champs/champs/championships/2017/gnebie/ultima.s"],
+            "args": ["vm_champs/champs/tests/barriere.s"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

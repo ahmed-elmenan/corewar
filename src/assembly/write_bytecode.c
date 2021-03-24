@@ -3,23 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   write_bytecode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/31 15:26:06 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/21 10:52:09 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 15:47:26 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-void write_octets(t_env *env, unsigned int num, int size)
+void	write_file_size(t_env *env, unsigned int num)
 {
-	unsigned char asp;
+	int size;
+	int byte;
 
+	size = 3;
 	while (size >= 0)
 	{
-		asp = (unsigned char)((num & (0xff << (size * 8))) >> (size * 8));
-		env->champion[env->i] = asp;
+		byte = (unsigned char)((num & (0xff << (size * 8))) >> (size * 8));
+		write(env->dst_file, &byte, 1);
+		size--;
+	}
+}
+
+void write_octets(t_env *env, unsigned int num, int size)
+{
+	while (size >= 0)
+	{
+		env->champion[env->i] = 
+					(unsigned char)((num & (0xff << (size * 8))) >> (size * 8));
 		size--;
 		(env->i)++;
 	}
@@ -56,7 +68,7 @@ void write_operation(t_env *env, t_opr *opr)
 
 void write_bytecode_in_file(t_env *env)
 {
-	t_opr *opr;
+	t_opr	*opr;
 
 	write_beginning_data(env);
 	opr = env->opr;
@@ -67,4 +79,6 @@ void write_bytecode_in_file(t_env *env)
 		opr = opr->next;
 	}
 	write(env->dst_file, env->champion, env->i);
+	if (lseek(env->dst_file, 136, SEEK_SET) > 0)
+		write_file_size(env, env->i);
 }

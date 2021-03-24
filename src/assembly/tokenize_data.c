@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/23 16:50:32 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 01:12:04 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 void	save_line(t_env *env, char *line, int *current_bytes)
 {
 	int i;
-
-	env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
-	env->dt = env->dt->next;
-	env->dt->line = line;
-	env->dt->current_octets = *current_bytes;
+	if (!env->flag)
+	{
+		env->data->line = line;
+		env->flag = TRUE;
+	}
+	else
+	{
+		env->dt->next = (t_data *)ft_memalloc(sizeof(t_data));
+		env->dt = env->dt->next;
+		env->dt->line = line;
+		env->dt->current_octets = *current_bytes;
+	}
 	if (is_label(line))
 	{
 		save_label_position(line, *current_bytes, env);
@@ -84,25 +91,22 @@ void	tokenize_data(t_env *env)
 	int		char_pos;
 	int		current_bytes;
 	int		i;
-	t_boolean flag;
 	int ret;
 
 	env->check_eof = FALSE;
-	flag = FALSE;
+	env->flag = FALSE;
 	current_bytes = 0;
 	env->dt = env->data;
 	while ((ret = get_next_line(env->src_file, &line)) > 0)
 	{
-		if (!flag)
-		{
-			env->data->line = line;
-			flag = TRUE;
-		}
 		env->line_counter += 1;
 		env->label_already_checked = 0;
 		trimed_line = ft_strtrim(line);
 		if (check_line(trimed_line))
+		{
+			ft_strdel(&line);
 			continue;
+		}
 		check_error_command(env, trimed_line, line);
 		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 &&
 			!trimed_line[char_pos + 1])
@@ -117,10 +121,10 @@ void	tokenize_data(t_env *env)
 			exit(0);
 		}
 	}
+	ft_strdel(&line);
 	if (!env->check_eof)
 	{
 		printf("Syntax Error: File doesn't contain any label or operation\n");	
 		exit(0);
 	}
-	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   liberate_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 10:48:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:29:59 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 01:11:37 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	delete_data(t_env *env)
 	while (ptr)
 	{
 		nxt = ptr->next;
-		// ft_memdel((void **)&(ptr->line));
+		ft_memdel((void **)&(ptr->line));
 		ft_memdel((void **)&ptr);
 		ptr = nxt;
 	}
@@ -36,7 +36,7 @@ void	delete_labels(t_env *env)
 	while (lbl)
 	{
 		nxt = lbl->next;
-		// ft_memdel((void **)&(lbl->label_name));
+		ft_memdel((void **)&(lbl->label_name));
 		ft_memdel((void **)&lbl);
 		lbl = nxt;
 	}

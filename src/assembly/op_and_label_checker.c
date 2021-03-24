@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_and_label_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:02:40 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 16:28:21 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 00:47:11 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void check_argument_value(t_env *env, char *trimed_str)
 	}
 	else if (trimed_str[0] == DIRECT_CHAR)
 	{
-		// printf("%s\n", trimed_str);
 		if (ft_is_string_number(trimed_str + 1) || trimed_str[1] == '-' || trimed_str[1] == '+')
 			handle_number_error(env, trimed_str, "Direct");
 		else if (trimed_str[1] == LABEL_CHAR && ft_isalnum(trimed_str[2]))
@@ -105,7 +104,6 @@ void check_argument_value(t_env *env, char *trimed_str)
 	}
 	else if (trimed_str[0] == LABEL_CHAR && ft_is_string_number(trimed_str))
 		handle_number_error(env, trimed_str, "Indirect");
-	// exit(0);
 	else if (trimed_str[0] == LABEL_CHAR && ft_isalnum(trimed_str[1]))
 		verify_label_chars(env, trimed_str + 1);
 }

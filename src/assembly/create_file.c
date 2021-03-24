@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 14:39:21 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/13 19:21:50 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 00:19:41 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ char	*get_file_name(char *s)
 {
 	int		last_dot;
 	char	*file_name;
+	char	*tmp;
 
 	file_name = NULL;
 	last_dot = get_last_dot_index(s);
-	file_name = ft_strjoin(ft_strsub(s, 0, get_last_dot_index(s)), ".cor");
+	tmp = ft_strsub(s, 0, get_last_dot_index(s));
+	file_name = ft_strjoin(tmp, ".cor");
+	ft_strdel(&tmp);
 	return (file_name);
 }
 

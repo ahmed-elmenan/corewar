@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/23 16:59:19 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 00:40:51 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ typedef struct	s_env
 	t_label		*lbl;
 	t_opr		*opr;
 	t_boolean	check_eof;
+	t_boolean	flag;
 	char		*bgn_data;
 	char		*champion;
 	int			src_file;

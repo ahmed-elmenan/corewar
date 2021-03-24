@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize_beginning_data.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/23 16:57:44 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 00:49:23 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,20 @@ void organize_beginning_data(t_env *env)
 		env->line_counter += 1;
 		env->trimed_line = ft_strtrim(regular_line);
 		if (check_line(env->trimed_line))
+		{
+			ft_strdel(&regular_line);
 			continue ;
+		}
 		if (check_command(env->trimed_line))
 			ft_command_not_found(env->trimed_line, regular_line, env);
 		ft_header_operations(env, regular_line);
 		if (check_name_comment_flag(env))
 		{
+			ft_strdel(&regular_line);
 			free_pointers(env->trimed_line, regular_line);
 			break;
 		}
-		// ft_strdel(&regular_line);
+		ft_strdel(&regular_line);
 		free_pointers(env->trimed_line, regular_line);
 	}
 	check_name_and_comment_existence(env->check_name, "name");

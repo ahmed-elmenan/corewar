@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:13:25 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 16:26:35 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:24:28 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-int arr_len_2d(t_env *env, char **str)
+int arr_len_2d(char **str)
 {
 	int i;
 
@@ -51,9 +51,8 @@ int char_index(char *str, char c)
 	return (-1);
 }
 
-void free_pointers(char *trimed_line, char *line)
+void free_pointers(char *trimed_line)
 {
-	// ft_strdel(&line);
 	ft_strdel(&trimed_line);
 }
 

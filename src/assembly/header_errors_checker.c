@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_errors_checker.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:43:22 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/18 14:59:45 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:26:57 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	check_missing_last_quotes_error(t_env *env, char *item,
 	}
 }
 
-void	check_characters_after_last_quotes(t_env *env, char *str,
+void	check_characters_after_last_quotes(char *str,
 											char *item, int line_counter)
 {
 	int		i;
@@ -55,7 +55,7 @@ void	check_characters_after_last_quotes(t_env *env, char *str,
 			printf("Syntax Error[%d]: ", line_counter);
 			printf("String <%s> has been found after %s ending quotes\n",
 					str, item);
-			free_pointers(tmp, tmp2);
+			free_pointers(tmp);
 			// ft_strdel(&str);
 			exit(0);
 		}

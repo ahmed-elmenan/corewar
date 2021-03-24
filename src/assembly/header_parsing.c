@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 02:09:56 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/24 00:56:43 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:27:39 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void		extract_multiline_string(t_env *env, int item_length,
 		tmp = env->joinned_str;
 		newline_str = ft_strjoin("\n", line);
 		env->joinned_str = ft_strjoin(env->joinned_str, newline_str);
-		free_pointers(newline_str, tmp);
+		free_pointers(newline_str);
 		ft_strdel(&tmp);
 		if ((env->quotes_index = char_index(env->joinned_str, '"')) >= 0)
 		{
-			check_characters_after_last_quotes(env,
+			check_characters_after_last_quotes(
 				env->joinned_str + env->quotes_index + 1,
 				item, env->line_counter_tmp);
 			env->joinned_str[env->quotes_index] = '\0';

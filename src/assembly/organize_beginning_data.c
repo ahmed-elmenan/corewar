@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   organize_beginning_data.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 00:49:23 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:28:32 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void store_string_item(t_env *env, char *item,
 void set_champ_info(t_env *env, int item_length,
 					char (*item_container)[item_length], char *item)
 {
-	char *content_arr;
-	char *tmp;
 	int last_quotes_index;
 	int quotes_nb;
 
@@ -44,7 +42,7 @@ void set_champ_info(t_env *env, int item_length,
 	if ((last_quotes_index = char_index(env->joinned_str, '"')) >= 0)
 	{
 		quotes_nb++;
-		check_characters_after_last_quotes(env,
+		check_characters_after_last_quotes(
 										   env->joinned_str + last_quotes_index + 1,
 										   item, env->line_counter);
 		env->joinned_str[last_quotes_index + 1] = '\0';
@@ -78,11 +76,11 @@ void organize_beginning_data(t_env *env)
 		if (check_name_comment_flag(env))
 		{
 			ft_strdel(&regular_line);
-			free_pointers(env->trimed_line, regular_line);
+			free_pointers(env->trimed_line);
 			break;
 		}
 		ft_strdel(&regular_line);
-		free_pointers(env->trimed_line, regular_line);
+		free_pointers(env->trimed_line);
 	}
 	check_name_and_comment_existence(env->check_name, "name");
 	check_name_and_comment_existence(env->check_comment, "comment");

@@ -13,37 +13,12 @@ LIBFT = $(LIBFT_DIR)/$(LIBFT_FILE)
 
 HEADERS = $(INC_DIR)corewar.h $(INC_DIR)op.h 
 
-ASSEMBLY_FILES = is_input_correct.c\
-				main.c\
-				utils.c\
-				check_line.c\
-				label_parsing.c\
-				operation_parsing.c\
-				header_parsing.c\
-				header_errors_checker.c\
-				commands_errors.c\
-				argument_errors.c\
-				numbers_errors.c\
-				op_and_label_checker.c\
-				ft_binary_search.c\
-				op.c\
-				organize_beginning_data.c\
-				tokenize_data.c\
-				translate_data_to_code.c\
-				analyze_line.c\
-				ft_atoll.c\
-				free_2d.c\
-				get_operation_info.c\
-				get_arguments_info.c\
-				create_file.c\
-				write_bytecode.c\
-				liberate_memory.c\
-				get_info.c
+ASSEMBLY_FILES = main.c utils.c check_line.c label_parsing.c operation_parsing.c header_parsing.c header_errors_checker.c commands_errors.c argument_errors.c numbers_errors.c op_and_label_checker.c ft_binary_search.c op.c organize_beginning_data.c tokenize_data.c translate_data_to_code.c analyze_line.c ft_atoll.c free_2d.c get_operation_info.c get_arguments_info.c create_file.c write_bytecode.c liberate_memory.c get_info.c
 
 OBJ_ASSEMBLY = $(addprefix $(OBJ_DIR)/, $(ASSEMBLY_FILES:%.c=%.o))
 
 CC = gcc
-CFLAGS = -g #-Wall -Werror -Wextra 
+CFLAGS = -g -Wall -Werror -Wextra 
 INC = -I $(INC_DIR) -I $(LIBFT_INC)
 
 all: $(NAME)

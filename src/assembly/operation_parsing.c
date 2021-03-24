@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operation_parsing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:07:38 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 14:51:41 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:25:13 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	operation_parsing(t_env *env, int *is_op, char *op, int i)
 		exit(0);
 	}
 	args = ft_strsplit(args_tmp, SEPARATOR_CHAR);
-	args_len = arr_len_2d(env, args);
+	args_len = arr_len_2d(args);
 	ft_check_args_len(env, args_len);
 	check_args_type(env, args);
 	free_2d(args, args_len);

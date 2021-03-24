@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 00:40:51 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:27:10 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int				verify_label_chars(t_env *env, char *label);
 int				is_label_operation_in_same_line(char *line);
 int				ft_binary_search(char *tab, char c);
 int				ft_binary_search_2d(t_env *env, char *operation, t_op tab[16]);
-int				arr_len_2d(t_env *env, char **str);
+int				arr_len_2d(char **str);
 int				ft_is_string_number(char *str);
 int				char_index(char *str, char c);
 int				skip_white_spaces_and_arg_chars(char *str);
@@ -139,7 +139,6 @@ void			label_parsing(t_env *env, char *str, char *tmp);
 void			verify_single_label_in_line(t_env *env, char *trimed_line,
 																int char_pos);
 void			check_error_command(t_env *env, char *trimed_line, char *line);
-void			free_pointers(char *trimed_line, char *line);
 void			error_passing_indirect(t_env *env, char *str);
 void			error_reg_value_is_negative(t_env *env);
 void			error_reg_value_not_digit(t_env *env);
@@ -160,13 +159,13 @@ void			ft_command_not_found(char *trimed_line, char *regular_line,
 																	t_env *env);
 void			check_if_operation_or_label(char *op, t_env *env);
 void			free_2d(char **array, int len);
-void			free_pointers(char *trimed_line, char *line);
+void			free_pointers(char *trimed_line);
 void			check_name_and_comment_existence(int checker, char *item);
 void			check_string_length(t_env *env, int item_len, int max_len,
 																	char *item);
 void			check_missing_last_quotes_error(t_env *env, char *item,
 															int quotes_index);
-void			check_characters_after_last_quotes(t_env *env, char *str,
+void			check_characters_after_last_quotes(char *str,
 												char *item, int line_counter);
 void			ft_error_found_before_item(char **str, char **line, t_env *env,
 																	char *item);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 01:12:04 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:29:43 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ void	save_line(t_env *env, char *line, int *current_bytes)
 void	verify_item_name(char *op, int i, int *is_op, t_env *env)
 {
 	char	*tmp;
-	char	*args_tmp;
-	char	**args;
-	int		args_len;
 
 	tmp = op + i - 1;
 	if (ft_binary_search_2d(env, env->sub_op, g_op_tab) >= 0 &&
@@ -69,7 +66,6 @@ void	verify_item_name(char *op, int i, int *is_op, t_env *env)
 void	check_if_operation_or_label(char *op, t_env *env)
 {
 	int		i;
-	char	*args;
 	int		is_op;
 
 	is_op = 0;
@@ -90,7 +86,6 @@ void	tokenize_data(t_env *env)
 	char	*trimed_line;
 	int		char_pos;
 	int		current_bytes;
-	int		i;
 	int ret;
 
 	env->check_eof = FALSE;

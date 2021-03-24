@@ -6,18 +6,18 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/23 14:49:06 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:38:07 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
 
-unsigned char set_args_octet(char *line)
+unsigned char	set_args_octet(char *line)
 {
-	unsigned char oct;
-	int i;
-	int shf;
-	int first_arg;
+	unsigned char	oct;
+	int				i;
+	int				shf;
+	int				first_arg;
 
 	oct = 0;
 	shf = 6;
@@ -28,8 +28,7 @@ unsigned char set_args_octet(char *line)
 	while (line[i] && shf && !is_comment_char(line[i]))
 	{
 		if (i == first_arg || ((line[i - 1] == SEPARATOR_CHAR ||
-								is_space(line[i - 1])) &&
-							   is_arg_first_char(line, i)))
+						is_space(line[i - 1])) && is_arg_first_char(line, i)))
 		{
 			oct = oct | (get_current_argument_code(&line[i]) << shf);
 			shf -= 2;
@@ -39,10 +38,10 @@ unsigned char set_args_octet(char *line)
 	return (oct);
 }
 
-int get_label_position(char *line, t_env *env)
+int				get_label_position(char *line, t_env *env)
 {
-	t_label *lbl;
-	int i;
+	t_label	*lbl;
+	int		i;
 
 	i = -1;
 	while (line[++i] && is_char_in_str(line[i], LABEL_CHARS))
@@ -55,15 +54,15 @@ int get_label_position(char *line, t_env *env)
 			return (lbl->label_position);
 		lbl = lbl->next;
 	}
-	printf("Error: Passed label not found\n");
+	ft_printf("Error: Passed label not found\n");
 	exit(0);
 	return (0);
 }
 
-unsigned int get_argument_value(char *line, int i, t_data *data, t_env *env)
+unsigned int	get_argument_value(char *line, int i, t_data *data, t_env *env)
 {
-	unsigned int value;
-	int label_pos;
+	unsigned int	value;
+	int				label_pos;
 
 	value = 0;
 	if (line[i] == ':' || (line[i] == '%' && line[i + 1] == ':' && ++i))
@@ -72,7 +71,8 @@ unsigned int get_argument_value(char *line, int i, t_data *data, t_env *env)
 		label_pos = get_label_position(&line[i], env);
 		value = label_pos - data->current_octets;
 	}
-	else if (line[i] == 'r' || line[i] == '%' || line[i] == '-' || ft_isdigit(line[i]))
+	else if (line[i] == 'r' || line[i] == '%' ||
+										line[i] == '-' || ft_isdigit(line[i]))
 	{
 		if (line[i] == 'r' || line[i] == '%')
 			i++;
@@ -81,10 +81,10 @@ unsigned int get_argument_value(char *line, int i, t_data *data, t_env *env)
 	return (value);
 }
 
-void fill_node_by_operation(t_opr *opr, char *line,
-							t_data *data, t_env *env)
+void			fill_node_by_operation(t_opr *opr, char *line,
+													t_data *data, t_env *env)
 {
-	int i;
+	int		i;
 
 	opr->enc_octet = 0;
 	i = get_first_char_index(line);
@@ -110,24 +110,24 @@ void fill_node_by_operation(t_opr *opr, char *line,
 	opr->arg3 = get_argument_value(line, i, data, env);
 }
 
-void	check_duplicated_labels(t_env *env)
+void			check_duplicated_labels(t_env *env)
 {
-	t_label *label_to_search;
-	t_label *lbl_to_cmp;
-	int founded;
+	t_label	*label_to_search;
+	t_label	*lbl_to_cmp;
+	int		founded;
 
 	lbl_to_cmp = env->label;
 	while (lbl_to_cmp)
 	{
 		founded = 0;
 		label_to_search = env->label;
-		while(label_to_search)
+		while (label_to_search)
 		{
 			if (ft_strequ(label_to_search->label_name, lbl_to_cmp->label_name))
 			{
 				if (founded)
 				{
-					printf("duplicated label founded\n");
+					ft_printf("duplicated label founded\n");
 					exit(0);
 				}
 				founded++;
@@ -138,17 +138,16 @@ void	check_duplicated_labels(t_env *env)
 	}
 }
 
-void translate_data_to_code(t_env *env)
+void			translate_data_to_code(t_env *env)
 {
-	t_data *data;
-	t_opr *opr;
-	int i;
+	t_data	*data;
+	t_opr	*opr;
+	int		i;
 
 	check_duplicated_labels(env);
 	data = env->data;
 	while (data)
 	{
-
 		i = 0;
 		if (is_operation(data->line) ||
 			(i = is_label_operation_in_same_line(data->line)))

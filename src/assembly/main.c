@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:35 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 12:05:11 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:46:58 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int ac, char **av)
 	{
 		if (av[1][ft_strlen(av[1]) - 1] != 's' || av[1][ft_strlen(av[1]) - 2] != '.')
 		{
-			printf("Error: The file <%s> is not a valid file it doesn't contain '.s' extension\n", av[1]);
+			ft_printf("Error: The file <%s> is not a valid file it doesn't contain '.s' extension\n", av[1]);
 			exit(0);
 		}
 		allocate_variables(&env);

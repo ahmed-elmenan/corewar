@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:12:14 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 18:29:43 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:52:02 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	save_line(t_env *env, char *line, int *current_bytes)
 {
 	int i;
+
 	if (!env->flag)
 	{
 		env->data->line = line;
@@ -57,7 +58,7 @@ void	verify_item_name(char *op, int i, int *is_op, t_env *env)
 	}
 	else
 	{
-		printf("Syntax Error[%d]: Operation <%s> not found\n",
+		ft_printf("Syntax Error[%d]: Operation <%s> not found\n",
 				env->line_counter, env->sub_op);
 		exit(0);
 	}
@@ -86,7 +87,7 @@ void	tokenize_data(t_env *env)
 	char	*trimed_line;
 	int		char_pos;
 	int		current_bytes;
-	int ret;
+	int		ret;
 
 	env->check_eof = FALSE;
 	env->flag = FALSE;
@@ -112,14 +113,14 @@ void	tokenize_data(t_env *env)
 		ft_strdel(&trimed_line);
 		if (ret == 2)
 		{
-			printf("file doesn't end with a new line\n");
+			ft_printf("file doesn't end with a new line\n");
 			exit(0);
 		}
 	}
 	ft_strdel(&line);
 	if (!env->check_eof)
 	{
-		printf("Syntax Error: File doesn't contain any label or operation\n");	
+		ft_printf("Syntax Error:File doesn't contain any label or operation\n");
 		exit(0);
 	}
 }

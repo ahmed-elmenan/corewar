@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:34:08 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 17:01:43 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 18:46:22 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	error_passing_indirect(t_env *env, char *str)
 {
 	if (str[0] == LABEL_CHAR || ft_is_string_number(str))
 	{
-		printf("Error[%d]: Passing indirect argument to <%s> operation\n",
+		ft_printf("Error[%d]: Passing indirect argument to <%s> operation\n",
 			env->line_counter, env->found_op->op_name);
 		exit(0);
 	}
@@ -26,7 +26,7 @@ void	error_passing_direct(t_env *env, char c)
 {
 	if (c == DIRECT_CHAR)
 	{
-		printf("Error[%d]: Passing direct argument to <%s> operation\n",
+		ft_printf("Error[%d]: Passing direct argument to <%s> operation\n",
 			env->line_counter, env->found_op->op_name);
 		exit(0);
 	}
@@ -36,7 +36,7 @@ void	error_passing_registry(t_env *env, char c)
 {
 	if (c == 'r')
 	{
-		printf("Error[%d]: Passing registry argument to <%s> operation\n",
+		ft_printf("Error[%d]: Passing registry argument to <%s> operation\n",
 			env->line_counter, env->found_op->op_name);
 		exit(0);
 	}
@@ -44,7 +44,7 @@ void	error_passing_registry(t_env *env, char c)
 
 void	error_big_reg_value(t_env *env)
 {
-	printf("Error[%d]: Registery value is bigger than 16\n",
+	ft_printf("Error[%d]: Registery value is bigger than 16\n",
 		env->line_counter);
 	exit(0);
 }

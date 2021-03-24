@@ -6,7 +6,7 @@
 /*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:43:22 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/24 18:26:57 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:24:49 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_string_length(t_env *env, int item_len, int max_len, char *item)
 {
 	if (item_len > max_len)
 	{
-		printf("Error[%d]: The champion %s exceed %d character\n",
+		ft_printf("Error[%d]: The champion %s exceed %d character\n",
 			env->line_counter, item, max_len);
 		exit(0);
 	}
@@ -27,8 +27,8 @@ void	check_missing_last_quotes_error(t_env *env, char *item,
 {
 	if (quotes_index == -1)
 	{
-		printf("syntax error[%d]: ", env->line_counter);
-		printf("Couldn't find the ending quotes of the %s string\n", item);
+		ft_printf("syntax error[%d]: ", env->line_counter);
+		ft_printf("Couldn't find the ending quotes of the %s string\n", item);
 		exit(0);
 	}
 }
@@ -52,11 +52,10 @@ void	check_characters_after_last_quotes(char *str,
 		{
 			tmp2 = ft_strsub(tmp, i, res - 1);
 			str = ft_strtrim(tmp2);
-			printf("Syntax Error[%d]: ", line_counter);
-			printf("String <%s> has been found after %s ending quotes\n",
+			ft_printf("Syntax Error[%d]: ", line_counter);
+			ft_printf("String <%s> has been found after %s ending quotes\n",
 					str, item);
 			free_pointers(tmp);
-			// ft_strdel(&str);
 			exit(0);
 		}
 	}
@@ -67,7 +66,7 @@ void	check_name_and_comment_existence(int checker, char *item)
 {
 	if (!checker)
 	{
-		printf("Error: Champion <%s> not found\n",
+		ft_printf("Error: Champion <%s> not found\n",
 				item);
 		exit(0);
 	}

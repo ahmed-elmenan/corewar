@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_line.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:36:33 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/21 16:38:28 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/24 19:24:33 by anel-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/corewar.h"
-
 
 int		ft_empty_or_comment_line(char c)
 {
@@ -23,7 +22,7 @@ int		ft_str_is_spaces(char *str)
 	int i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!ft_empty_or_comment_line(str[i]) && !is_space(str[i]))
 			return (0);
@@ -65,6 +64,3 @@ void	verify_single_label_in_line(t_env *env, char *trimed_line, int char_pos)
 	verify_label_chars(env, label);
 	ft_strdel(&label);
 }
-
-
-

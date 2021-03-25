@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_errors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:39:24 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/24 18:46:32 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:35:30 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	unknown_arg_error(t_env *env, char *trimed_str)
 
 void	arg_is_empty(t_env *env, int i)
 {
-	ft_printf("Error[%d]: Argument number %d is Empty",
+	ft_printf("Error[%d]: Argument number %d is Empty\n",
 				env->line_counter, i + 1);
 	exit(0);
 }

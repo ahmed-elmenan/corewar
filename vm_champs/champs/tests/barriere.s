@@ -8,7 +8,7 @@
 # On bombarde derriere notre programme
 
 arriere:	ld	%-5, r5
-		ld	%1024,r4
+		ld	,r4
 arriere2:	ld	%-5, r3
 arriere_live:	live %:live_live
 		sti	r4, %:arriere, r3

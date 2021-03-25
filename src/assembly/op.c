@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2021/03/24 19:28:45 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:38:06 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,10 @@ void	header_parser(t_env *env, char *line)
 {
 	check_extra_command(env, line);
 	ft_header_operations(env, line);
+}
+
+int		comment_detected(int *comment_index, char *trimed_str)
+{
+	return ((*comment_index = char_index(trimed_str, COMMENT_CHAR)) >= 0 ||
+		(*comment_index = char_index(trimed_str, ALT_COMMENT_CHAR)) >= 0);
 }

@@ -1,15 +1,15 @@
 NAME = asm
-LIBFT_FILE = libft.a
+PRINTF_FILE = libftprintf.a
 
-LIBFT_DIR = ./libft
+PRINTF_DIR = ./ft_printf
 ASSEMBLY_DIR = ./src/assembly
 INC_DIR = ./includes/
-LIBFT_INC = $(LIBFT_DIR)/
+PRINTF_INC = $(PRINTF_DIR)/
 OBJ_DIR = ./obj
 
 LFLAG = 
 
-LIBFT = $(LIBFT_DIR)/$(LIBFT_FILE)
+PRINTF = $(PRINTF_DIR)/$(PRINTF_FILE)
 
 HEADERS = $(INC_DIR)corewar.h $(INC_DIR)op.h 
 
@@ -19,7 +19,7 @@ OBJ_ASSEMBLY = $(addprefix $(OBJ_DIR)/, $(ASSEMBLY_FILES:%.c=%.o))
 
 CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra 
-INC = -I $(INC_DIR) -I $(LIBFT_INC)
+INC = -I $(INC_DIR) -I $(PRINTF_INC)
 
 all: $(NAME)
 
@@ -30,15 +30,18 @@ $(OBJ_DIR):
 	@mkdir $(OBJ_DIR)
 
 $(NAME): $(OBJ_DIR) $(OBJ_ASSEMBLY)
-	@make -C $(LIBFT_DIR)
-	@$(CC) $(OBJ_ASSEMBLY) $(LIBFT) $(LFLAG) -o $(NAME)
+	@make -C $(PRINTF_DIR)
+	@$(CC) $(OBJ_ASSEMBLY) $(PRINTF) $(LFLAG) -o $(NAME)
+	@echo "\033[1;34m--> asm files were created\033[1;34m"
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
+	@make -C $(PRINTF_DIR) clean
+	@echo "\033[1;34m--x asm object files were deleted\033[1;34m"
 
 fclean: clean
 	@rm -rf $(NAME)
-	@make -C $(LIBFT_DIR) fclean
+	@make -C $(PRINTF_DIR) fclean
+	@echo "\033[1;34m--x asm files were deleted\033[1;34m"
 
 re: fclean all

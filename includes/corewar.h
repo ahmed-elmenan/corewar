@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   corewar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 18:27:10 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/25 16:15:46 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "../libft/libft.h"
+# include "../ft_printf/ft_printf.h"
 # include "op.h"
 # include <fcntl.h>
 # include <unistd.h>
@@ -121,6 +121,7 @@ int				is_arg_first_char(char *line, int i);
 int				is_input_correct(char *s);
 int				is_args_octet_present(int op);
 int				is_label_operation_in_same_line(char *line);
+int				comment_detected(int *comment_index, char *trimed_str);
 int				ft_empty_or_comment_line(char c);
 int				create_file(char *s, t_env *env);
 int				check_line(char *regular_line);
@@ -168,6 +169,7 @@ void			organize_beginning_data(t_env *env);
 void			tokenize_data(t_env *env);
 void			translate_data_to_code(t_env *env);
 void			write_beginning_data(t_env *env);
+void			check_duplicated_labels(t_env *env);
 void			write_bytecode_in_file(t_env *env);
 void			verify_direct_value(t_env *env, char *trimed_str);
 void			ft_command_not_found(char *trimed_line, char *regular_line,

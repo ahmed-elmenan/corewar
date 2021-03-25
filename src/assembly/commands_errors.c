@@ -36,3 +36,18 @@ void	ft_command_not_found(char *trimed_line, char *regular_line, t_env *env)
 	ft_strdel(&regular_line);
 	exit(0);
 }
+
+void	unknown_arg_error(t_env *env, char *trimed_str)
+{
+	ft_printf("Error[%d]: Passing unknown argument to operation <%s>\n",
+		env->line_counter, env->found_op->op_name);
+	ft_strdel(&trimed_str);
+	exit(0);
+}
+
+void	arg_is_empty(t_env *env, int i)
+{
+	ft_printf("Error[%d]: Argument number %d is Empty",
+				env->line_counter, i + 1);
+	exit(0);
+}

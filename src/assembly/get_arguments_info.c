@@ -62,3 +62,21 @@ int		get_current_argument_code(char *line)
 	else
 		return (0b11);
 }
+
+void	verify_direct_value(t_env *env, char *trimed_str)
+{
+	if (ft_is_string_number(trimed_str + 1) || trimed_str[1] == '-'
+			|| trimed_str[1] == '+')
+		handle_number_error(env, trimed_str, "Direct");
+	else if (trimed_str[1] == LABEL_CHAR && ft_isalnum(trimed_str[2]))
+	{
+		verify_label_chars(env, trimed_str + 2);
+	}
+	else
+	{
+		ft_printf("Lexical Error[%d]: ", env->line_counter);
+		ft_printf("Argument contains inappropriate characters <%s>\n",
+			trimed_str);
+		exit(0);
+	}
+}

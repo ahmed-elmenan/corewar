@@ -110,34 +110,6 @@ void			fill_node_by_operation(t_opr *opr, char *line,
 	opr->arg3 = get_argument_value(line, i, data, env);
 }
 
-void			check_duplicated_labels(t_env *env)
-{
-	t_label	*label_to_search;
-	t_label	*lbl_to_cmp;
-	int		founded;
-
-	lbl_to_cmp = env->label;
-	while (lbl_to_cmp)
-	{
-		founded = 0;
-		label_to_search = env->label;
-		while (label_to_search)
-		{
-			if (ft_strequ(label_to_search->label_name, lbl_to_cmp->label_name))
-			{
-				if (founded)
-				{
-					ft_printf("duplicated label founded\n");
-					exit(0);
-				}
-				founded++;
-			}
-			label_to_search = label_to_search->next;
-		}
-		lbl_to_cmp = lbl_to_cmp->next;
-	}
-}
-
 void			translate_data_to_code(t_env *env)
 {
 	t_data	*data;

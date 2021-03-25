@@ -32,3 +32,9 @@ void	error_value_contains_positive_sign(t_env *env, char *arg_type)
 		env->line_counter, arg_type);
 	exit(0);
 }
+
+int		is_unknown_arg(char *str)
+{
+	return (str[0] != LABEL_CHAR && str[0] != DIRECT_CHAR &&
+			str[0] != 'r' && !ft_is_string_number(str));
+}

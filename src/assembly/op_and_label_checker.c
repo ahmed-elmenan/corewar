@@ -88,20 +88,7 @@ void	check_argument_value(t_env *env, char *trimed_str)
 		}
 	}
 	else if (trimed_str[0] == DIRECT_CHAR)
-	{
-		if (ft_is_string_number(trimed_str + 1) || trimed_str[1] == '-'
-														|| trimed_str[1] == '+')
-			handle_number_error(env, trimed_str, "Direct");
-		else if (trimed_str[1] == LABEL_CHAR && ft_isalnum(trimed_str[2]))
-		{
-			verify_label_chars(env, trimed_str + 2);
-		}
-		else
-		{
-			ft_printf("Lexical Error[%d]: Argument contains inappropriate characters <%s>\n", env->line_counter, trimed_str);
-			exit(0);
-		}
-	}
+		verify_direct_value(env, trimed_str);
 	else if (trimed_str[0] == LABEL_CHAR && ft_is_string_number(trimed_str))
 		handle_number_error(env, trimed_str, "Indirect");
 	else if (trimed_str[0] == LABEL_CHAR && ft_isalnum(trimed_str[1]))

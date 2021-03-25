@@ -55,11 +55,10 @@ void	set_champ_info(t_env *env, int item_length,
 void	organize_beginning_data(t_env *env)
 {
 	char	*regular_line;
-	int		ret;
 
 	env->hdr.magic = ((COREWAR_EXEC_MAGIC & 0xff) << 24) |
 	(COREWAR_EXEC_MAGIC << 8 & 0xff0000) | (COREWAR_EXEC_MAGIC >> 8 & 0xff00);
-	while ((ret = get_next_line(env->src_file, &regular_line)) > 0)
+	while (get_next_line(env->src_file, &regular_line) > 0)
 	{
 		env->line_counter += 1;
 		env->trimed_line = ft_strtrim(regular_line);
@@ -68,9 +67,7 @@ void	organize_beginning_data(t_env *env)
 			ft_strdel(&regular_line);
 			continue ;
 		}
-		if (check_command(env->trimed_line))
-			ft_command_not_found(env->trimed_line, regular_line, env);
-		ft_header_operations(env, regular_line);
+		header_parser(env, regular_line);
 		if (check_name_comment_flag(env))
 		{
 			ft_strdel(&regular_line);

@@ -51,3 +51,49 @@ void	label_parsing(t_env *env, char *str, char *tmp)
 	env->label_already_checked = 1;
 	ft_strdel(&str);
 }
+
+void	verify_single_label_in_line(t_env *env, char *trimed_line, int char_pos)
+{
+	char *label;
+
+	env->check_eof = TRUE;
+	env->label_already_checked = 1;
+	label = ft_strsub(trimed_line, 0, char_pos);
+	verify_label_chars(env, label);
+	ft_strdel(&label);
+}
+
+void	check_duplicated_labels(t_env *env)
+{
+	t_label	*label_to_search;
+	t_label	*lbl_to_cmp;
+	int		founded;
+
+	lbl_to_cmp = env->label;
+	while (lbl_to_cmp)
+	{
+		founded = 0;
+		label_to_search = env->label;
+		while (label_to_search)
+		{
+			if (ft_strequ(label_to_search->label_name, lbl_to_cmp->label_name))
+			{
+				if (founded)
+				{
+					ft_printf("duplicated label founded\n");
+					exit(0);
+				}
+				founded++;
+			}
+			label_to_search = label_to_search->next;
+		}
+		lbl_to_cmp = lbl_to_cmp->next;
+	}
+}
+
+int		is_comment_at_end(int *comment_index, char *trimed_str)
+{
+	return ((*comment_index = char_index(trimed_str, COMMENT_CHAR)) >= 0 ||
+				(*comment_index = char_index(trimed_str,
+					ALT_COMMENT_CHAR)) >= 0);
+}

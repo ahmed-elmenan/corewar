@@ -98,6 +98,11 @@ typedef struct	s_env
 	int			quotes_index;
 	char		*trimed_line;
 	char		*label_as_arg;
+	int			ret;
+	char		*line;
+	int			char_pos;
+	int			current_bytes;
+
 }				t_env;
 
 int				get_operation_code(char *line);
@@ -131,7 +136,14 @@ int				char_index(char *str, char c);
 int				skip_white_spaces_and_arg_chars(char *str);
 int				check_command(char *trimed_line);
 int				calculate_comment_index(char *str);
+int				is_comment_at_end(int *comment_index, char *trimed_str);
+int				is_unknown_arg(char *str);
 t_boolean		ft_atoll(const char *str);
+void			arg_is_empty(t_env *env, int i);
+void			is_empty_body(t_env *env);
+void			is_newline_at_eof(t_env *env);
+void			init_vars(t_env *env);
+void			unknown_arg_error(t_env *env, char *trimed_str);
 void			check_args_type(t_env *env, char **args);
 void			operation_parsing(t_env *env, int *is_op, char *op, int i);
 void			save_label_position(char *line, int current_bytes, t_env *env);
@@ -139,6 +151,8 @@ void			label_parsing(t_env *env, char *str, char *tmp);
 void			verify_single_label_in_line(t_env *env, char *trimed_line,
 																int char_pos);
 void			check_error_command(t_env *env, char *trimed_line, char *line);
+void			check_extra_command(t_env *env, char *line);
+void			header_parser(t_env *env, char *line);
 void			error_passing_indirect(t_env *env, char *str);
 void			error_reg_value_is_negative(t_env *env);
 void			error_reg_value_not_digit(t_env *env);
@@ -155,6 +169,7 @@ void			tokenize_data(t_env *env);
 void			translate_data_to_code(t_env *env);
 void			write_beginning_data(t_env *env);
 void			write_bytecode_in_file(t_env *env);
+void			verify_direct_value(t_env *env, char *trimed_str);
 void			ft_command_not_found(char *trimed_line, char *regular_line,
 																	t_env *env);
 void			check_if_operation_or_label(char *op, t_env *env);

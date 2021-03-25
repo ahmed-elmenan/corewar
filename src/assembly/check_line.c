@@ -53,14 +53,3 @@ void	check_error_command(t_env *env, char *trimed_line, char *line)
 	if (trimed_line[0] == '.')
 		ft_command_not_found(trimed_line, line, env);
 }
-
-void	verify_single_label_in_line(t_env *env, char *trimed_line, int char_pos)
-{
-	char *label;
-
-	env->check_eof = TRUE;
-	env->label_already_checked = 1;
-	label = ft_strsub(trimed_line, 0, char_pos);
-	verify_label_chars(env, label);
-	ft_strdel(&label);
-}

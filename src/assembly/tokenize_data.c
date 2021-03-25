@@ -83,44 +83,29 @@ void	check_if_operation_or_label(char *op, t_env *env)
 
 void	tokenize_data(t_env *env)
 {
-	char	*line;
 	char	*trimed_line;
-	int		char_pos;
-	int		current_bytes;
-	int		ret;
 
-	env->check_eof = FALSE;
-	env->flag = FALSE;
-	current_bytes = 0;
-	env->dt = env->data;
-	while ((ret = get_next_line(env->src_file, &line)) > 0)
+	init_vars(env);
+	while ((env->ret = get_next_line(env->src_file, &env->line)) > 0)
 	{
 		env->line_counter += 1;
 		env->label_already_checked = 0;
-		trimed_line = ft_strtrim(line);
+		trimed_line = ft_strtrim(env->line);
 		if (check_line(trimed_line))
 		{
-			ft_strdel(&line);
+			ft_strdel(&env->line);
 			continue;
 		}
-		check_error_command(env, trimed_line, line);
-		if ((char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 &&
-			!trimed_line[char_pos + 1])
-			verify_single_label_in_line(env, trimed_line, char_pos);
+		check_error_command(env, trimed_line, env->line);
+		if ((env->char_pos = char_index(trimed_line, LABEL_CHAR)) >= 0 &&
+			!trimed_line[env->char_pos + 1])
+			verify_single_label_in_line(env, trimed_line, env->char_pos);
 		else
 			check_if_operation_or_label(trimed_line, env);
-		save_line(env, line, &current_bytes);
+		save_line(env, env->line, &env->current_bytes);
 		ft_strdel(&trimed_line);
-		if (ret == 2)
-		{
-			ft_printf("file doesn't end with a new line\n");
-			exit(0);
-		}
+		is_newline_at_eof(env);
 	}
-	ft_strdel(&line);
-	if (!env->check_eof)
-	{
-		ft_printf("Syntax Error:File doesn't contain any label or operation\n");
-		exit(0);
-	}
+	ft_strdel(&env->line);
+	is_empty_body(env);
 }

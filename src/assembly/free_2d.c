@@ -28,3 +28,29 @@ void	free_2d(char **array, int len)
 		array = NULL;
 	}
 }
+
+void	is_empty_body(t_env *env)
+{
+	if (!env->check_eof)
+	{
+		ft_printf("Syntax Error:File doesn't contain any label or operation\n");
+		exit(0);
+	}
+}
+
+void	is_newline_at_eof(t_env *env)
+{
+	if (env->ret == 2)
+	{
+		ft_printf("file doesn't end with a new line\n");
+		exit(0);
+	}
+}
+
+void	init_vars(t_env *env)
+{
+	env->check_eof = FALSE;
+	env->flag = FALSE;
+	env->current_bytes = 0;
+	env->dt = env->data;
+}

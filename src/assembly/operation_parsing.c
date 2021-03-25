@@ -53,22 +53,11 @@ void	check_args_type(t_env *env, char **args)
 	{
 		trimed_str = ft_strtrim(args[i]);
 		if (!ft_strlen(trimed_str))
-		{
-			ft_printf("Error[%d]: Argument number %d is Empty",
-													env->line_counter, i + 1);
-			exit(0);
-		}
+			arg_is_empty(env, i);
 		check_passing_wrong_arg(env, trimed_str, i);
-		if (trimed_str[0] != LABEL_CHAR && trimed_str[0] != DIRECT_CHAR &&
-			trimed_str[0] != 'r' && !ft_is_string_number(trimed_str))
-		{
-			ft_printf("Error[%d]: Passing unknown argument to operation <%s>\n",
-					env->line_counter, env->found_op->op_name);
-			ft_strdel(&trimed_str);
-			exit(0);
-		}
-		if ((comment_index = char_index(trimed_str, COMMENT_CHAR)) >= 0 ||
-				(comment_index = char_index(trimed_str, ALT_COMMENT_CHAR)) >= 0)
+		if (is_unknown_arg(trimed_str))
+			unknown_arg_error(env, trimed_str);
+		if (comment_detected(&comment_index, trimed_str))
 		{
 			tmp = trimed_str;
 			trimed_str[comment_index] = 0;

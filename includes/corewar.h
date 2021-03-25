@@ -71,7 +71,7 @@ typedef struct	s_opr
 
 typedef struct	s_env
 {
-	header_t	hdr;
+	t_header	hdr;
 	t_data		*data;
 	t_data		*dt;
 	t_label		*label;

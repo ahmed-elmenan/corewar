@@ -13,5 +13,4 @@ Errors in:
 makefile
 ft_printf
 author
-
-
+define must be a constant value (op.h norme)

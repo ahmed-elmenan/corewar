@@ -12,7 +12,7 @@
 
 #include "../../includes/corewar.h"
 
-int open_file(char *s, t_env *env)
+int		open_file(char *s, t_env *env)
 {
 	if ((env->src_file = open(s, O_RDONLY)) == -1)
 	{
@@ -22,23 +22,28 @@ int open_file(char *s, t_env *env)
 	return (1);
 }
 
-void allocate_variables(t_env **env)
+void	allocate_variables(t_env **env)
 {
+	int champ_max_size;
+
+	champ_max_size = CHAMP_MAX_SIZE;
 	(*env) = (t_env *)ft_memalloc(sizeof(t_env));
 	(*env)->data = (t_data *)ft_memalloc(sizeof(t_data));
 	(*env)->bgn_data = (char *)ft_memalloc(sizeof(char) * BGN_DATA);
-	(*env)->champion = (char *)ft_memalloc(sizeof(char) * CHAMP_MAX_SIZE * 10);
+	(*env)->champion = (char *)ft_memalloc(sizeof(char) * champ_max_size * 10);
 }
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_env *env;
 
 	if (ac > 1)
 	{
-		if (av[1][ft_strlen(av[1]) - 1] != 's' || av[1][ft_strlen(av[1]) - 2] != '.')
+		if (av[1][ft_strlen(av[1]) - 1] != 's'
+			|| av[1][ft_strlen(av[1]) - 2] != '.')
 		{
-			ft_printf("Error: The file <%s> is not a valid file it doesn't contain '.s' extension\n", av[1]);
+			ft_printf("Error: The file <%s> is not a valid file ", av[1]);
+			ft_printf("it doesn't contain '.s' extension\n");
 			exit(0);
 		}
 		allocate_variables(&env);

@@ -6,11 +6,11 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2021/03/25 16:38:06 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 t_op	g_op_tab[17] =
 {

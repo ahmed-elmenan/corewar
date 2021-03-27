@@ -6,7 +6,7 @@
 #    By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/08 00:20:23 by ahel-men          #+#    #+#              #
-#    Updated: 2021/03/25 16:24:17 by ahel-men         ###   ########.fr        #
+#    Updated: 2021/03/27 19:42:22 by ahel-men         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,8 @@ SRC	=	ft_afflst.c\
 		ft_lsterase.c \
 		ft_atoi_base.c \
 		str_begins_with.c \
+		between.c \
+		is_number.c \
 		is_char_in_str.c \
 		get_next_line.c
 

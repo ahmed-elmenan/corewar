@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_and_label_checker.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 03:02:40 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/24 19:41:37 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 int		verify_label_chars(t_env *env, char *label)
 {

@@ -6,11 +6,11 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 12:46:23 by aybouras          #+#    #+#             */
-/*   Updated: 2021/03/18 15:07:22 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 void	free_2d(char **array, int len)
 {

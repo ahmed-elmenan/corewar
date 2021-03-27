@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   translate_data_to_code.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:20:59 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 19:38:07 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 unsigned char	set_args_octet(char *line)
 {

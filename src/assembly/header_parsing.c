@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   header_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 02:09:56 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/24 19:32:26 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 void		extract_multiline_string(t_env *env, int item_length,
 							char (*item_container)[item_length], char *item)

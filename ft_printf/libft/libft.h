@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/03 20:29:40 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/25 16:22:14 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/27 19:40:36 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char				*ft_itoa(int n);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
+int					is_number(char *str);
 int					str_begins_with(char *str, char *begin_part);
 int					ft_atoi(const char *str);
 int					is_char_in_str(char c, char *str);
@@ -73,6 +74,7 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 int					ft_intlen(int n);
 int					ft_words_count(const char *str, char c);
 int					get_next_line(const int fd, char **line);
+int					between(int value, int min, int max);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *b, int c, int len);
 void				*ft_memsetll(void *b, int c, long long len);

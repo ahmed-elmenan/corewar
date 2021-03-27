@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:35 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 18:46:58 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:27:23 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 int		open_file(char *s, t_env *env)
 {

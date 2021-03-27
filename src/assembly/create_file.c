@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/30 14:39:21 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 00:19:41 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:26:03 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 int		get_last_dot_index(char *s)
 {

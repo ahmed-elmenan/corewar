@@ -6,21 +6,23 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/09 12:26:57 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/25 16:15:46 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:23:51 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
 # define COREWAR_H
 
-# include "../ft_printf/ft_printf.h"
-# include "op.h"
+# include "../../ft_printf/ft_printf.h"
+# include "../op.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stdio.h>
 
 # define BGN_DATA 2192
+# define FOUR_BYTES 4
+# define MAX_DUMP 64
 
 typedef enum	e_boolean
 {

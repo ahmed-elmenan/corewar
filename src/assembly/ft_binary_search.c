@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_binary_search.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 01:42:17 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/23 12:43:43 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 int	ft_binary_search(char *tab, char c)
 {

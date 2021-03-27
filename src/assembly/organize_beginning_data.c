@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   organize_beginning_data.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 10:14:49 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 19:51:28 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:49 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 void	store_string_item(t_env *env, char *item, int item_length,
 											char (*item_container)[item_length])

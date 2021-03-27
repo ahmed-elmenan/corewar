@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_begins_with.c                                  :+:      :+:    :+:   */
+/*   between.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aybouras <aybouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 16:13:06 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/25 17:23:24 by ahel-men         ###   ########.fr       */
+/*   Created: 2021/03/25 12:19:00 by aybouras          #+#    #+#             */
+/*   Updated: 2021/03/25 12:20:42 by aybouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		str_begins_with(char *str, char *begin_part)
+int		between(int value, int min, int max)
 {
-	int i;
-
-	i = -1;
-	if (!(*str) || !(*begin_part))
-		return (0);
-	while (str[++i] && begin_part[i] && str[i] == begin_part[i])
-		;
-	if (!begin_part[i])
-		return (1);
-	return (0);
+	return (value >= min && value <= max);
 }

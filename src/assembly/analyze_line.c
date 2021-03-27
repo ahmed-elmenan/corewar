@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   analyze_line.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anel-bou <anel-bou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/29 09:18:26 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/24 19:23:17 by anel-bou         ###   ########.fr       */
+/*   Updated: 2021/03/27 18:25:51 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/corewar.h"
+#include "../../includes/asm_inc/corewar.h"
 
 int		is_empty_line(char *line)
 {

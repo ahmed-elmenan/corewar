@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_begins_with.c                                  :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 16:13:06 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/25 17:23:24 by ahel-men         ###   ########.fr       */
+/*   Created: 2021/01/12 11:35:05 by aybouras          #+#    #+#             */
+/*   Updated: 2021/03/27 18:09:35 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/vm_inc/cor.h"
 
-int		str_begins_with(char *str, char *begin_part)
+int			main(int ac, char **av)
 {
-	int i;
+	t_vm vm;
 
-	i = -1;
-	if (!(*str) || !(*begin_part))
-		return (0);
-	while (str[++i] && begin_part[i] && str[i] == begin_part[i])
-		;
-	if (!begin_part[i])
-		return (1);
+	vm_init(&vm);
+	parse_args(ac, av, &vm);
+	prepare_battleground(&vm);
+	show_gladiators(vm.gladiators);
+	let_the_game_begin(&vm);
 	return (0);
 }

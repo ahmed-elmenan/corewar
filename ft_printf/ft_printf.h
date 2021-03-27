@@ -6,7 +6,7 @@
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 15:44:23 by ahel-men          #+#    #+#             */
-/*   Updated: 2021/03/25 15:58:07 by ahel-men         ###   ########.fr       */
+/*   Updated: 2021/03/27 15:17:35 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ char					*ft_make_precision(t_list2 **list,
 char					*ft_itoa_u(unsigned long long nb);
 char					*ft_itoa2(long long n);
 int						ft_make_str(t_list2 **list, char *str, t_data1 *data);
+int						between(int value, int min, int max);
 int						ft_make_hexa(t_list2 **list, t_data1 *data);
 int						ft_make_number(t_list2 **list, t_data1 *data);
 int						ft_hash_hexa_condition(t_list2 **list,

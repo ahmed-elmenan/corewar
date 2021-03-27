@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_begins_with.c                                  :+:      :+:    :+:   */
+/*   is_number.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aybouras <aybouras@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 16:13:06 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/25 17:23:24 by ahel-men         ###   ########.fr       */
+/*   Created: 2021/03/25 12:19:54 by aybouras          #+#    #+#             */
+/*   Updated: 2021/03/25 12:20:04 by aybouras         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		str_begins_with(char *str, char *begin_part)
+/*
+** MIN = -2147483648 MAX = 2147483647
+*/
+
+int		is_number(char *str)
 {
 	int i;
 
-	i = -1;
-	if (!(*str) || !(*begin_part))
+	i = 0;
+	if (str == NULL)
 		return (0);
-	while (str[++i] && begin_part[i] && str[i] == begin_part[i])
-		;
-	if (!begin_part[i])
-		return (1);
-	return (0);
+	if (str[0] == '-')
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
 }

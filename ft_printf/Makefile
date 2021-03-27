@@ -37,7 +37,7 @@ SRCS	= ft_convert.c \
 		  ft_store_add.c \
 		  ft_mlp_func.c \
 		  ft_add_func_extension.c \
-		  ft_check_pr.c
+		  ft_check_pr.c 
 
 OBJECT	=	$(SRCS:.c=.o)
 
@@ -45,12 +45,12 @@ LFT		=	libft/libft.a
 
 HEADERS = ft_printf.h
 
-all : $(NAME)
+all : lib $(NAME)
 
 $(OBJECT): %.o: %.c $(HEADERS)
 	@$(CC) -g -c $(CFLAGS) -o $@ $<
 
-$(LFT):
+lib:
 	@make -C libft
 
 $(NAME) : $(OBJECT) $(LFT)

@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_begins_with.c                                  :+:      :+:    :+:   */
+/*   little_to_big_endian.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ahel-men <ahel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/12 16:13:06 by anel-bou          #+#    #+#             */
-/*   Updated: 2021/03/25 17:23:24 by ahel-men         ###   ########.fr       */
+/*   Created: 2021/02/02 11:43:26 by aybouras          #+#    #+#             */
+/*   Updated: 2021/03/27 18:13:20 by ahel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/vm_inc/cor.h"
 
-int		str_begins_with(char *str, char *begin_part)
+u_int32_t	little_to_big_endian(u_int32_t x)
 {
-	int i;
-
-	i = -1;
-	if (!(*str) || !(*begin_part))
-		return (0);
-	while (str[++i] && begin_part[i] && str[i] == begin_part[i])
-		;
-	if (!begin_part[i])
-		return (1);
-	return (0);
+	return (((x >> 24) & 0x000000ff)
+			| ((x >> 8) & 0x0000ff00)
+			| ((x << 8) & 0x00ff0000)
+			| ((x << 24) & 0xff000000));
 }
